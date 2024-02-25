@@ -1,0 +1,3 @@
+# Ignorar carpetas de clases generadas
+classes/
+test-classes/
