@@ -1,6 +1,6 @@
 package com.logisticasBC.biblioteca;
 
-import com.logisticasBC.biblioteca.frontEnd.VentanaPrincipal;
+import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.VentanaPrincipal;
 
 public class Main  {
 

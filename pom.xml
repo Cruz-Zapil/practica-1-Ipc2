@@ -14,5 +14,11 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+  
+    <dependency>
+      <groupId>de.mhus.ports</groupId>
+      <artifactId>vaadin-borderlayout</artifactId>
+      <version>1.3.6</version>
+    </dependency>
   </dependencies>
 </project>
