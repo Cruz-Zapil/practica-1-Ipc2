@@ -2,7 +2,7 @@ package com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel;
 
 import javax.swing.JPanel;
 
-import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.botonMenu.AccionMenu;
+import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.accionesUsuario.AccionMenu;
 import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.botonMenu.ContruccionBoton;
 
 
