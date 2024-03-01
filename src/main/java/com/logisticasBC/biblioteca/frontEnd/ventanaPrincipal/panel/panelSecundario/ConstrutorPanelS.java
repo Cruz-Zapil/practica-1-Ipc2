@@ -14,7 +14,7 @@ public class ConstrutorPanelS extends JPanel {
     public ConstrutorPanelS(String texto) {
 
         this.setLayout(null);
-        this.setBounds(0, 0, 690, 750);
+        this.setBounds(0, 0, 720, 750);
         this.setBackground(new Color(255, 228, 181));
 
         tituloPanel(texto);

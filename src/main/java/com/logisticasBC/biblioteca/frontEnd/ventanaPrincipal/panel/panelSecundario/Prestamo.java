@@ -13,8 +13,7 @@ public class Prestamo extends ConstrutorPanelS {
     private JLabel[] labels = new JLabel[5];
     private String[] etiqueta = { "Carné Estudiante", "Fecha Prestamo", "Info. Estudiante ", "Código Libro",
             "Info. Libro" };
-
-    private static JLabel[] infoLabels = new JLabel[3]; 
+    private String[] textBoton = { "Buscar", "Aceptar", "Cancelar" };
 
     private ActionPrestamo accionesBoton = new ActionPrestamo();
 
@@ -70,36 +69,27 @@ public class Prestamo extends ConstrutorPanelS {
 
     }
 
+    private void addButtons() {
 
-    private void addButtons(){
-        
-        JButton [] botones = new JButton[3];
+        JButton[] botones = new JButton[3];
 
         for (int i = 0; i < botones.length; i++) {
-            botones[i]= new JButton();
+            botones[i] = new JButton();
             botones[i].addActionListener(accionesBoton);
-            this.add(botones[i]);            
+            botones[i].setText(textBoton[i]);
+            this.add(botones[i]);
         }
 
-        botones[0].setBounds(570,230,90,30);
-        botones[0].setText("Buscar");
+        botones[0].setBounds(570, 230, 90, 30);
 
-        botones[1].setBounds(450,620,90,30);
-        botones[1].setText("Aceptar");
+        botones[1].setBounds(450, 620, 90, 30);
 
-        botones[2].setBounds(570,620,90,30);
-        botones[2].setText("Cancelar");
-        
-     
-
+        botones[2].setBounds(570, 620, 90, 30);
 
     }
 
-    private void addInfoLabels(){
-        
-
+    private void addInfoLabels() {
 
     }
-
 
 }

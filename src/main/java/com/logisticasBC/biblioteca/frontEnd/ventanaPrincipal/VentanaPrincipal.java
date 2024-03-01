@@ -20,7 +20,7 @@ public class VentanaPrincipal extends JFrame {
 
         this.setTitle(" Biblioteca Cunoc");
 
-        this.setBounds(300, 300, 900, 750);
+        this.setBounds(300, 300, 930, 750);
         this.setLayout(null);
         this.setResizable(false);
         this.setVisible(true);
@@ -30,7 +30,7 @@ public class VentanaPrincipal extends JFrame {
         panelIzquierdo.setLayout(null);
 
         panelIzquierdo.setBounds(0, 0, 210, 900);
-        panelCentral.setBounds(210, 0, 690, 750);
+        panelCentral.setBounds(210, 0, 720, 750);
 
         panelIzquierdo.setBackground(Color.BLACK);
         panelCentral.setBackground(new Color(255, 228, 181));

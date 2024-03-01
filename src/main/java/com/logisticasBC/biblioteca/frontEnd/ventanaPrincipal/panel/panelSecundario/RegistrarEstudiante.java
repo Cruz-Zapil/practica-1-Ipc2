@@ -3,7 +3,7 @@ package com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecunda
 
 import javax.swing.JTextField;
 
-import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.accionesUsuario.actionPanelSecundario.ActionNewLibro;
+import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.accionesUsuario.actionPanelSecundario.ActionNewData;
 
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -67,12 +67,12 @@ public class RegistrarEstudiante extends ConstrutorPanelS {
         JButton aceptar = new JButton();
         aceptar.setText("Aceptar");
         aceptar.setBounds(450,620,90,30);
-        aceptar.addActionListener(new ActionNewLibro());
+        aceptar.addActionListener(new ActionNewData());
         
         JButton cancelar = new JButton();
         cancelar.setText("Cancelar");
         cancelar.setBounds(570,620,90,30);
-        cancelar.addActionListener(new ActionNewLibro());
+        cancelar.addActionListener(new ActionNewData());
 
         this.add(aceptar);
         this.add(cancelar);

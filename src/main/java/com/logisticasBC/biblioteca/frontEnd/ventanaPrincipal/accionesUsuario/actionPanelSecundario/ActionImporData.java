@@ -3,15 +3,12 @@ package com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.accionesUsuario.ac
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
-public class ActionNewStudent implements ActionListener{
+public class ActionImporData implements ActionListener  {
 
     @Override
-    public void actionPerformed(ActionEvent event) {
+    public void actionPerformed(ActionEvent arg0) {
         
-
+        
     }
-
-    
     
 }
