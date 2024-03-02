@@ -4,6 +4,7 @@
  */
 package com.logisticasBC.biblioteca.backEnd;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -11,33 +12,54 @@ import java.time.temporal.ChronoUnit;
  *
  * @author Personal
  */
-public class Prestamo {
+public class Prestamo extends Archivo {
     public final static int MORA_A_COBRAR = 5;
     public final static int PRECIO_ALQUILER_LIBRO = 10;
     public final static int MAX_DIAS_SIN_MORA = 3;
     public final static int MAX_A_PAGAR = (MAX_DIAS_SIN_MORA * PRECIO_ALQUILER_LIBRO);
     
     private String codigoLibro;
-    private int carneEstudiante;
+    private int carnetEstudiante;
     private LocalDate fechaPrestamo;
     private boolean prestamoMoroso;
 
     //METODOS
-
-    public Prestamo(String codigoLibro, int carneEstudiante) {
-        this.codigoLibro = codigoLibro;
-        this.carneEstudiante = carneEstudiante;
-        this.fechaPrestamo = LocalDate.now();
-    }
-    
-    
+    public int setAtributos(String[] textoLeido, int tipoArchivo){
+        
+        switch (textoLeido[0]) {
+            
+            case "PRESTAMO":
+            return tipoArchivo;  
+            
+            case "CODIGOLIBRO": codigoLibro = textoLeido[1];
+                               
+            return tipoArchivo;
+                
+            case "CARNET": carnetEstudiante = Integer.parseInt(textoLeido[1]);
+                           super.codigo = codigoLibro +"+"+ textoLeido[1];
+                          
+                return tipoArchivo;
+                
+            case "FECHA": String fecha = textoLeido[1];
+                                 String[] separacionFecha = fecha.split("-");
+                                 int anio = Integer.parseInt(separacionFecha[0]);
+                                 int mes = Integer.parseInt(separacionFecha[1]);
+                                 int dia = Integer.parseInt(separacionFecha[2]);
+                                 fechaPrestamo = LocalDate.of(
+                                         anio, mes, dia);
+                return 0;
+              
+            default:
+                return tipoArchivo;
+        }
+    }    
     
     public String getCodigoLibro() {
         return codigoLibro;
     }
 
     public int getCarneEstudiante() {
-        return carneEstudiante;
+        return carnetEstudiante;
     }
 
     public LocalDate getFechaPrestamo() {
@@ -70,5 +92,10 @@ public class Prestamo {
         }
         
         return cantidadPago;
+    }
+
+    @Override
+    public String getPath() {
+        return ControladorAchivos.PATH_DIRECTORIO_PRESTAMOS + File.separatorChar + super.codigo;
     }
 }

@@ -4,6 +4,7 @@
  */
 package com.logisticasBC.biblioteca.backEnd;
 
+import java.io.File;
 import java.time.LocalDate;
 
 
@@ -11,30 +12,43 @@ import java.time.LocalDate;
  *
  * @author Personal
  */
-public class Libro {
+public class Libro extends Archivo {
     
     private String titulo;
     private String autor;
-    private String codigo;
+    private String codigoLibro;
     private int cantCopiasDisponibles;
     private LocalDate fechaPublicacion;
     private String editorial;
-
-    public Libro(String titulo, String autor, String codigo, int cantCopiasDisponibles, LocalDate fechaPublicacion, String editorial) {
-        this.titulo = titulo;
-        this.autor = autor;
-        this.codigo = codigo;
-        this.cantCopiasDisponibles = cantCopiasDisponibles;
-        this.fechaPublicacion = fechaPublicacion;
-        this.editorial = editorial;
-    }
     
-    public Libro(String titulo, String autor, String codigo, int cantCopiasDisponibles) {
-        this.titulo = titulo;
-        this.autor = autor;
-        this.codigo = codigo;
-        this.cantCopiasDisponibles = cantCopiasDisponibles;
-    } 
+    public int setAtributos(String[] textoLeido, int tipoArchivo){
+        
+        switch (textoLeido[0]) {
+            
+            case "LIBRO":
+            return tipoArchivo;  
+            
+            case "TITULO": titulo = textoLeido[1];
+            return tipoArchivo;
+                
+            case "AUTOR": autor = textoLeido[1];
+                return tipoArchivo;
+
+            case "CODIGO": 
+                codigoLibro = textoLeido[1];
+                super.codigo = this.codigoLibro;
+                if (codigoLibro == null) {
+                    return ControladorAchivos.ERROR;
+                }
+                return tipoArchivo;
+
+             case "CANTIDAD": cantCopiasDisponibles = Integer.parseInt(textoLeido[1]);
+                return 0; 
+
+            default:
+                return ControladorAchivos.ERROR;
+        }
+    }
     
     public boolean copiasDisponibles(){
         
@@ -49,8 +63,8 @@ public class Libro {
         return autor;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public String getCodigoLibro() {
+        return codigoLibro;
     }
 
     public int getCantCopiasDisponibles() {
@@ -63,6 +77,11 @@ public class Libro {
 
     public String getEditorial() {
         return editorial;
+    }
+
+    @Override
+    public String getPath() {
+        return ControladorAchivos.PATH_DIRECTORIO_LIBROS + File.separatorChar + super.codigo;
     }
     
     

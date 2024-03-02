@@ -4,6 +4,7 @@
  */
 package com.logisticasBC.biblioteca.backEnd;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -11,28 +12,40 @@ import java.util.ArrayList;
  *
  * @author Personal
  */
-public class Estudiante {
+public class Estudiante extends Archivo {
     
-    private int carne;
+    private int carnet = 0;
     private String nombre;
-    private int codigoCarrera;
+    private int carrera;
+    
     private LocalDate fechaNacimiento;
+    
     private String[] codigoLibrosPrestados = new String[3];
     private ArrayList<Prestamo> prestamosRealizados;
+    
     private int contLibrosEnPosecion = 0;
+   
+    public int setAtributos(String[] textoLeido, int tipoArchivo){
 
-    //constructor con solo los datos necesarios de un estudiante
-    public Estudiante(int carne, String nombre, int codigoCarrera) {
-        this.carne = carne;
-        this.nombre = nombre;
-        this.codigoCarrera = codigoCarrera;
-    }
-    // constructor con todos los datos que puede llegar a tener un estudiante
-    public Estudiante(int carne, String nombre, int codigoCarrera, LocalDate fechaNacimiento) {
-        this.carne = carne;
-        this.nombre = nombre;
-        this.codigoCarrera = codigoCarrera;
-        this.fechaNacimiento = fechaNacimiento;
+         switch (textoLeido[0]) {
+
+             case "ESTUDIANTE":
+             return tipoArchivo;  
+
+             case "CARNET": carnet = Integer.parseInt(textoLeido[1]);
+                            super.codigo = textoLeido[1];
+                            
+             return tipoArchivo;
+
+             case "NOMBRE": nombre = textoLeido[1];
+                 return tipoArchivo;
+                 
+             case "CARRERA": carrera = Integer.parseInt(textoLeido[1]);
+                 return 0;
+                 
+            default:
+                return ControladorAchivos.ERROR;
+         }
     }
     
     public void prestamosDisponibles(String codigoLibro)throws LibreriaException{
@@ -80,6 +93,16 @@ public class Estudiante {
                 codigoLibrosPrestados[i] = null;
             }
         }
+    }
+
+    public int getCarnet(){
+        return carnet;
+    }
+
+    @Override
+    public String getPath() {
+
+        return ControladorAchivos.PATH_DIRECTORIO_ESTUDIANTES + File.separatorChar + super.codigo;
     }
     
 }

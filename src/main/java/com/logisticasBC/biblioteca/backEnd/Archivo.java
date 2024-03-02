@@ -4,9 +4,16 @@
  */
 package com.logisticasBC.biblioteca.backEnd;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Personal
  */
-public class Archivo {
+
+public abstract class Archivo implements Serializable{
+    
+    protected String codigo;
+    
+    public abstract String getPath();
 }
