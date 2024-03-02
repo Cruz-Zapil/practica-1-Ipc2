@@ -2,7 +2,7 @@ package com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel;
 
 import javax.swing.JPanel;
 
-import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.botonMenu.AccionBoton;
+import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.accionesUsuario.AccionMenu;
 import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.botonMenu.ContruccionBoton;
 
 
@@ -18,14 +18,14 @@ import java.awt.Color;
 
 public class PanelMenu extends JPanel {
 
-    private String [] etiquetas= {"Prestamo", "Devolucion", "Consulta", "Nuevo Registro", " Importar Datos","Acerca de:"};
+    private String [] etiquetas= {"Prestamo", "Devolucion", "Consulta", "Nuevo Registro", "Importar Datos","Acerca de:"};
     private ContruccionBoton[] botonMenu= new ContruccionBoton[6];
-    private AccionBoton accionBoton = new AccionBoton();
+    private AccionMenu accionBoton = new AccionMenu();
 
     public PanelMenu() {
 
         this.setLayout(null);
-        this.setBounds(0, 0, 210, 900);
+        this.setBounds(0, 0, 210, 750);
         this.setBackground(new Color(255,222,173));
 
         setComponents();
