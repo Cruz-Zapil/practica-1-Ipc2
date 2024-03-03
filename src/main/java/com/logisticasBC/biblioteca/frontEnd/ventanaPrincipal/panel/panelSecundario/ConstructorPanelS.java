@@ -7,11 +7,11 @@ import javax.swing.JPanel;
 
 import javax.swing.JLabel;
 
-public class ConstrutorPanelS extends JPanel {
+public class ConstructorPanelS extends JPanel {
 
     private JPanel panelTitulo = new JPanel();
 
-    public ConstrutorPanelS(String texto) {
+    public ConstructorPanelS(String texto) {
 
         this.setLayout(null);
         this.setBounds(0, 0, 720, 750);
@@ -23,8 +23,8 @@ public class ConstrutorPanelS extends JPanel {
 
     public void tituloPanel(String titulo) {
 
-        panelTitulo.setBounds(0, 15, 690, 90);
-        panelTitulo.setBackground(new Color(25, 228, 181));
+        panelTitulo.setBounds(0, 10, 690, 95);
+        panelTitulo.setBackground(new Color(255, 228, 181));
 
         JLabel label = new JLabel(titulo);
 

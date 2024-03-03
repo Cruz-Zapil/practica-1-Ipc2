@@ -148,7 +148,7 @@ public class ControladorAchivos {
             return lineasMalLeidas; 
             
         } catch (Exception e) {
-            throw new LibreriaException("Error al cargar los dastos del archivo de texto");
+            throw new LibreriaException("Error al cargar los datos del archivo de texto");
         }
 
     }

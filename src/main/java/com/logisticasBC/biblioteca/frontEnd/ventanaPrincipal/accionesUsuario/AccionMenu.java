@@ -4,10 +4,13 @@ package com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.accionesUsuario;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import com.logisticasBC.biblioteca.frontEnd.utilFrontEnd.Message;
 import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.VentanaPrincipal;
 import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.botonMenu.ContruccionBoton;
 import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecundario.Devolucion;
 import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecundario.Prestamo;
+import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecundario.RegistrarEstudiante;
+import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecundario.RegistrarLibro;
 import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecundario.Reporte;
 import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecundario.panelImportarDato.ImportarDato;
 
@@ -36,7 +39,17 @@ public class AccionMenu implements ActionListener {
 
             }else if (botonMenu.getText().equals("Nuevo Registro")){
 
-                
+                int tmp = Message.seleccioneOpcion("Seleccione una opcion:", "Nuevo Registro");
+
+                if (tmp ==1){
+
+                    VentanaPrincipal.addPanelCentral(new RegistrarEstudiante());
+
+                }else if (tmp == 2){
+
+                    VentanaPrincipal.addPanelCentral(new RegistrarLibro());
+
+                }
 
             }else if (botonMenu.getText().equals("Importar Datos")){
 
