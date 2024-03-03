@@ -8,10 +8,10 @@ import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.accionesUsuario.act
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
-public class RegistrarEstudiante extends ConstrutorPanelS {
+public class RegistrarEstudiante extends ConstructorPanelS {
 
     private JLabel[] labels = new JLabel[4];
-    private String[] etiqueta = {"Carnè ","Código Carrera", "Nombre","Fecha Nacimiento"};
+    private String[] etiqueta = {"Carné ","Código Carrera", "Nombre","Fecha Nacimiento"};
     private JTextField [] cajaTexto = new JTextField[4];
 
     public RegistrarEstudiante(){
@@ -44,13 +44,13 @@ public class RegistrarEstudiante extends ConstrutorPanelS {
 
 
             /// agregando JTextField 
-
             cajaTexto[i] = new JTextField();
             cajaTexto[i].setBounds(x_posField, y_posField, 180,30);
+            y_posField = y_posField + 90;
 
             if (i==1) {
                 x_posField = x_posField + 290;
-                y_posField =200;                
+                y_posField =230;                
             }
 
             this.add(cajaTexto[i]);

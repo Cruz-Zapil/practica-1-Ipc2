@@ -3,7 +3,7 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.accionesUsuario.actionPanelSecundario.ActionImporData;
-import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecundario.ConstrutorPanelS;
+import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecundario.ConstructorPanelS;
 import com.vaadin.ui.ComboBox;
 
 
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 
-public class ImportarDato extends ConstrutorPanelS{
+public class ImportarDato extends ConstructorPanelS{
 
 
     private JLabel [] jlabel = new JLabel[3];

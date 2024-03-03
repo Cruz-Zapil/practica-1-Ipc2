@@ -41,7 +41,6 @@ public class PanelMenu extends JPanel {
 
             tmp= tmp +60;
             this.add(botonMenu[i]);
-            System.out.println("crear boton "+ etiquetas[i]+ i);
             
         }
 

@@ -2,11 +2,13 @@ package com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.lang.reflect.Constructor;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.PanelMenu;
+import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecundario.ConstructorPanelS;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -29,7 +31,7 @@ public class VentanaPrincipal extends JFrame {
         panelIzquierdo = new JPanel();
         panelIzquierdo.setLayout(null);
 
-        panelIzquierdo.setBounds(0, 0, 210, 900);
+        panelIzquierdo.setBounds(0, 0, 210, 750);
         panelCentral.setBounds(210, 0, 720, 750);
 
         panelIzquierdo.setBackground(Color.BLACK);
@@ -37,8 +39,8 @@ public class VentanaPrincipal extends JFrame {
 
         /// texto central
 
-        JLabel label = new JLabel("BiBlioteca");
-        label.setBounds(10, 30, 200, 20);// Ajusta la posición y tamaño según tus necesidades
+        JLabel label = new JLabel("BIBLIOTECA");
+        label.setBounds(165, 320, 380, 50);// Ajusta la posición y tamaño según tus necesidades
         panelCentral.add(label);
 
         Font fuente = label.getFont();
