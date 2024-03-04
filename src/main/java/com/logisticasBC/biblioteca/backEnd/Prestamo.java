@@ -153,8 +153,16 @@ public class Prestamo extends Archivo {
     
     /* 
     //FILTROS (PARTE DE LOS REPORTES)
+<<<<<<< HEAD
     public static ArrayList<Prestamo>() {
 
+=======
+    public static ArrayList<Prestamo> filtarPrestamosPor(){
+        ArrayList<Prestamo> prestamos = new ArrayList<Prestamo>();
+        
+        return prestamos;
+        
+>>>>>>> 33e756ef5da274fb2ea50115dcf83ca51d9b4a44
     }
     */
 }

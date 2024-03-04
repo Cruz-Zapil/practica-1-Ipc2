@@ -15,20 +15,6 @@ import java.util.ArrayList;
  * @author Personal
  */
 public class Libro extends Archivo {
-    
-    public Libro (){
-        
-    }
-
-    public Libro(String titulo, String autor, String codigoLibro, int cantCopiasDisponibles, LocalDate fechaPublicacion,
-            String editorial) {
-        this.titulo = titulo;
-        this.autor = autor;
-        this.codigoLibro = codigoLibro;
-        this.cantCopiasDisponibles = cantCopiasDisponibles;
-        this.fechaPublicacion = fechaPublicacion;
-        this.editorial = editorial;
-    }
 
     private static final long serialVersionUID = 16549498498410L;
 
@@ -38,6 +24,24 @@ public class Libro extends Archivo {
     private int cantCopiasDisponibles;
     private LocalDate fechaPublicacion;
     private String editorial;
+
+    public Libro (){
+        
+    }
+
+    public Libro(String titulo, String autor, String codigoLibro, int cantCopiasDisponibles, LocalDate fechaPublicacion, String editorial) throws LibreriaException {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.codigoLibro = codigoLibro;
+        super.codigo = codigoLibro;
+        this.cantCopiasDisponibles = cantCopiasDisponibles;
+        this.fechaPublicacion = fechaPublicacion;
+        this.editorial = editorial;
+
+        File archivo
+
+    }
+
     
     public int setAtributos(String[] textoLeido, int tipoArchivo){
         

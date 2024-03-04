@@ -96,8 +96,7 @@ public class RegistrarEstudiante extends ConstructorPanelS implements ActionList
             if (sourceButton.getText().equals("Aceptar")) {
                 if (!cajaTexto[0].getText().isEmpty() && !cajaTexto[1].getText().isEmpty() && !cajaTexto[2].getText().isEmpty()) {
                 
-                    Estudiante nuevotmp = new Estudiante(cajaTexto[0].getText(),cajaTexto[2].getText(), 2, LocalDate.of(2024,12,25) );
-
+             
                  
 
                     Message.mostrarConfirmacion("Registro Guardado", "Nuevo Estudiante");
