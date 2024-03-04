@@ -37,7 +37,7 @@ public class Libro extends Archivo {
         this.editorial = editorial;
         
         if (super.archivoExite(ControladorAchivos.PATH_DIRECTORIO_LIBROS + File.separatorChar + this.codigoLibro)) {
-            Libro libroExistente = (Libro)ControladorAchivos.cargarArchivo(ControladorAchivos.PATH_DIRECTORIO_LIBROS + File.separatorChar + this.codigoLibro)
+            Libro libroExistente = (Libro)ControladorAchivos.cargarArchivo(ControladorAchivos.PATH_DIRECTORIO_LIBROS + File.separatorChar + this.codigoLibro);
             libroExistente.setCantCopiasDisponibles(cantCopiasDisponibles);
             throw new LibreriaException("El libro ya esta registrado en la biblioteca se actualizo el registro de libros disponibles en la biblioteca");
 
