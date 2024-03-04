@@ -7,10 +7,12 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import com.logisticasBC.biblioteca.backEnd.Estudiante;
+import com.logisticasBC.biblioteca.backEnd.Libro;
 import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.accionesUsuario.actionPanelSecundario.ActionDevolution;
-import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecundario.panelImportarDato.PanelPrestamo;
+import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecundario.panelImportarDato.MostradorDatos;
 
-public class Devolucion extends ConstrutorPanelS {
+public class Devolucion extends ConstructorPanelS {
 
     /*
      * 3 botones
@@ -34,7 +36,7 @@ public class Devolucion extends ConstrutorPanelS {
 
         addEtiquetas();
         addJTextFiel();
-        addTabla();
+        //addTabla();
         addButtons();
     }
 
@@ -87,18 +89,11 @@ public class Devolucion extends ConstrutorPanelS {
 
     }
 
-    private void addTabla() {
+    private void addTabla(Libro envio ) {
 
         ArrayList<String> holi = new ArrayList<>();
         ArrayList<ArrayList<String>> filas = new ArrayList<>();
-        filas.add(new ArrayList<>(List.of("Dato 1-1", "Dato 1-2", "datos")));
-        filas.add(new ArrayList<>(List.of("Dato 2-1", "Dato 2-2")));
-        filas.add(new ArrayList<>(List.of("Dato 1-1", "Dato 1-2", "datos")));
-        filas.add(new ArrayList<>(List.of("Dato 2-1", "Dato 2-2")));
-        filas.add(new ArrayList<>(List.of("Dato 1-1", "Dato 1-2", "datos")));
-        filas.add(new ArrayList<>(List.of("Dato 2-1", "Dato 2-2")));
-        filas.add(new ArrayList<>(List.of("Dato 1-1", "Dato 1-2", "datos")));
-        filas.add(new ArrayList<>(List.of("Dato 2-1", "Dato 2-2")));
+      // filas.add(new ArrayList<>(List.of(envio.getAutor(), envio.getCodigo()  )));
 
         holi.add(" uno");
         holi.add(" dos ");
@@ -106,7 +101,7 @@ public class Devolucion extends ConstrutorPanelS {
         holi.add(" cuatro");
         holi.add(" cinco");
 
-        this.add(new PanelPrestamo(holi, filas, 310));
+        this.add(new MostradorDatos(holi, filas, 310));
     }
 
 }

@@ -7,7 +7,7 @@ import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.accionesUsuario.act
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
-public class RegistrarLibro extends ConstrutorPanelS {
+public class RegistrarLibro extends ConstructorPanelS {
 
     private JLabel[] jLabel = new JLabel[6];
     private JTextField[] textField = new JTextField[6];
@@ -49,10 +49,10 @@ public class RegistrarLibro extends ConstrutorPanelS {
 
             textField[i] = new JTextField();
             textField[i].setBounds(x_posField, y_posField, 180, 30);
-
+            y_posField = y_posField + 90;
             if (i == 2) {
                 x_posField = x_posField + 290;
-                y_posField = 200;
+                y_posField = 230;
             }
 
             this.add(textField[i]);

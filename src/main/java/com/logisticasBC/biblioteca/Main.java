@@ -17,14 +17,12 @@ public class Main  {
 
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
-       
-
+       System.out.println( "Hello World!" );
+ 
         //VentanaPrincipal inicio = new VentanaPrincipal();
         
         try {
            String ruta = "C:"+File.separatorChar+"Users"+File.separatorChar+"Personal"+File.separatorChar+"Documents"+File.separatorChar+"data.txt";
-        //    /////////
            ControladorAchivos.leerArchivoTxt(ruta);
     //        System.out.println("archivo de texto leido");
 
@@ -36,7 +34,7 @@ public class Main  {
     //      System.out.println(" ");
     //       System.out.println("listado de estudiantes filtrados por carrera");
             
-                ArrayList<Estudiante> estudiantes = ListarFiltrarArchivos.getEstudiantes();
+    //            ArrayList<Estudiante> estudiantes = ListarFiltrarArchivos.getEstudiantes();
     //            for (Estudiante estudiante : estudiantes) {
     //                System.out.println("");
     //                System.out.println(estudiante.getNombre());
@@ -47,7 +45,7 @@ public class Main  {
     //                    System.out.println(libroDelEstudiante.getTitulo() );
     //                }
     //            }
-
+        Estudiante estudiante = new Estudiante("00123456", "Brigido", 0, LocalDate.now());
 
         } catch (LibreriaException e) {
             e.getMessage();
@@ -55,6 +53,8 @@ public class Main  {
         }
        
        
+        
+
     }
 
    

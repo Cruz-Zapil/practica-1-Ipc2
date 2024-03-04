@@ -7,7 +7,7 @@ import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.accionesUsuario.act
 
 import javax.swing.JButton;
 
-public class Prestamo extends ConstrutorPanelS {
+public class Prestamo extends ConstructorPanelS {
 
     // etiqueta
     private JLabel[] labels = new JLabel[5];
@@ -22,7 +22,7 @@ public class Prestamo extends ConstrutorPanelS {
     private JTextField libro = new JTextField();
 
     public Prestamo() {
-        super("Prestamo");
+        super("Nuevo Prestamo");
         this.setLayout(null);
         addEtiquetas();
         addJTextFiel();

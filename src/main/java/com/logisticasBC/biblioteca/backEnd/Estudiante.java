@@ -20,16 +20,25 @@ public class Estudiante extends Archivo {
     private String nombre;
     private int carrera;
     private LocalDate fechaNacimiento;
-    private ArrayList<String> codigoLibrosPrestados = new ArrayList();
+    
+    private ArrayList<String> codigoLibrosPrestados = new ArrayList<>();
     private ArrayList<Prestamo> prestamosRealizados = new ArrayList<>();
-
-    public Estudiante(String carnet, String nombre, int carrera, LocalDate fechaNacimiento) {
-        
+    
+    public Estudiante(String carnet, String nombre, int carrera, LocalDate fechaNacimiento) throws LibreriaException {
         this.carnet = carnet;
         this.nombre = nombre;
         this.carrera = carrera;
         this.fechaNacimiento = fechaNacimiento;
+        super.codigo = carnet;
+        
+        File archivo = new File(ControladorAchivos.PATH_DIRECTORIO_ESTUDIANTES + File.separatorChar + this.carnet);
+        if ( archivo.exists()) {
+            throw new LibreriaException("El estudiante ya esta registrado en la biblioteca");
+        } else {
+            super.actualizar();
+        }
     }
+
        
     public int setAtributos(String[] textoLeido, int tipoArchivo){
 
@@ -75,7 +84,6 @@ public class Estudiante extends Archivo {
         prestamosRealizados.add(nuevoPrestamo);
         codigoLibrosPrestados.add(nuevoPrestamo.getCodigoLibro());
         super.actualizar();
-        System.out.println("actualizando prestamo del estudiante");
     }
     
     /*El estudiante devuelve el libro se elimina el registro en el arreglo de codigos de libros prestados*/
