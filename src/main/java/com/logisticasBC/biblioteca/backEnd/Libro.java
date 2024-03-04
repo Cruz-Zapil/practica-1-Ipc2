@@ -38,7 +38,7 @@ public class Libro extends Archivo {
         this.fechaPublicacion = fechaPublicacion;
         this.editorial = editorial;
 
-        File archivo
+  
 
     }
 

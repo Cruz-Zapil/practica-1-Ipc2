@@ -6,7 +6,6 @@ import javax.swing.JTextField;
 import com.logisticasBC.biblioteca.backEnd.Estudiante;
 import com.logisticasBC.biblioteca.backEnd.LibreriaException;
 import com.logisticasBC.biblioteca.frontEnd.utilFrontEnd.Message;
-import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.accionesUsuario.actionPanelSecundario.ActionNewData;
 
 import javax.swing.JLabel;
 
@@ -90,16 +89,26 @@ public class RegistrarEstudiante extends ConstructorPanelS implements ActionList
    
     @Override
     public void actionPerformed(ActionEvent event) {
+
+        
         if (event.getSource() instanceof JButton) {
             JButton sourceButton = (JButton) event.getSource();
     
             if (sourceButton.getText().equals("Aceptar")) {
                 if (!cajaTexto[0].getText().isEmpty() && !cajaTexto[1].getText().isEmpty() && !cajaTexto[2].getText().isEmpty()) {
                 
-             
-                 
+                   
+                    try {
+                        // nuevo estudiante 
+                        new Estudiante(cajaTexto[0].getText(),cajaTexto[2].getText(), 2, LocalDate.of(2024,12,25) );
 
-                    Message.mostrarConfirmacion("Registro Guardado", "Nuevo Estudiante");
+                        Message.mostrarMensajeInfo("Registro Guardado", "Nuevo Estudiante");
+
+                    } catch (LibreriaException e) {
+                        Message.mostrarMensajeError("Error de almacenado","Error de Registro");
+                        e.printStackTrace();
+                    }
+                  
                 } else {
 
                     Message.mostrarMensajeError("Rellene bien los datos", "Error de Datos");

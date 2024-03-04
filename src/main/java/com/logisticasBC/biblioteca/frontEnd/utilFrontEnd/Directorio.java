@@ -4,6 +4,8 @@ import java.nio.file.Paths;
 import java.nio.file.Path;
 
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import java.io.File;
 
 
@@ -25,30 +27,21 @@ public class Directorio {
     }
 
 
-    public String mobtenerRutaCarpeta() {
+    public String obtenerRutaArchivo() {
         JFileChooser miBuscador = new JFileChooser(".");
-        miBuscador.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); // Solo seleccionar directorios
+        miBuscador.setFileSelectionMode(JFileChooser.FILES_ONLY); // Solo seleccionar archivos
+        // Opcional: Filtrar por tipo de archivo
+        miBuscador.setFileFilter(new FileNameExtensionFilter("Archivos", "txt", "pdf", "doc"));
 
-        int valor = miBuscador.showOpenDialog(miBuscador);
+        int valor = miBuscador.showOpenDialog(null);
         if (valor == JFileChooser.APPROVE_OPTION) {
-            File seleccionado = miBuscador.getSelectedFile();
-            String rutaCarpetaAbsoluta = seleccionado.getAbsolutePath();
-
-            // Obtener la ruta absoluta del directorio base (puede ser el directorio actual)
-            String directorioBase = System.getProperty("user.dir");
-            Path pathBase = Paths.get(directorioBase);
-
-            // Obtener la ruta relativa
-            Path pathAbsoluto = Paths.get(rutaCarpetaAbsoluta);
-            Path pathRelativo = pathBase.relativize(pathAbsoluto);
-
-            String rutaCarpetaRelativa = pathRelativo.toString();
-            System.out.println(rutaCarpetaRelativa);
-
-            return rutaCarpetaRelativa;
+            String rutaArchivo = miBuscador.getSelectedFile().getAbsolutePath();
+            System.out.println(rutaArchivo);
+            return rutaArchivo;
         }
 
         return null; // Retorna null si la selección fue cancelada
     }
+
 
 }

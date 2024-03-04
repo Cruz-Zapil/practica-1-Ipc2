@@ -32,6 +32,7 @@ public class Estudiante extends Archivo {
         super.codigo = carnet;
         
         File archivo = new File(ControladorAchivos.PATH_DIRECTORIO_ESTUDIANTES + File.separatorChar + this.carnet);
+        
         if ( archivo.exists()) {
             throw new LibreriaException("El estudiante ya esta registrado en la biblioteca");
         } else {

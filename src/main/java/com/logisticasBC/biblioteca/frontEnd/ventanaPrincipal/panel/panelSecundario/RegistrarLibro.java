@@ -2,8 +2,6 @@ package com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecunda
 
 import javax.swing.JTextField;
 
-import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.accionesUsuario.actionPanelSecundario.ActionNewData;
-
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
@@ -65,12 +63,12 @@ public class RegistrarLibro extends ConstructorPanelS {
         JButton aceptar = new JButton();
         aceptar.setText("Aceptar");
         aceptar.setBounds(450,620,90,30);
-        aceptar.addActionListener(new ActionNewData());
+        aceptar.addActionListener(null);
         
         JButton cancelar = new JButton();
         cancelar.setText("Cancelar");
         cancelar.setBounds(570,620,90,30);
-        cancelar.addActionListener(new ActionNewData());
+        cancelar.addActionListener(null);
 
         this.add(aceptar);
         this.add(cancelar);
