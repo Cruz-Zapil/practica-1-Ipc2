@@ -25,9 +25,7 @@ public class Libro extends Archivo {
     private LocalDate fechaPublicacion;
     private String editorial;
 
-    public Libro (){
-        
-    }
+    public Libro (){    }
 
     public Libro(String titulo, String autor, String codigoLibro, int cantCopiasDisponibles, LocalDate fechaPublicacion, String editorial) throws LibreriaException {
         this.titulo = titulo;
@@ -37,8 +35,15 @@ public class Libro extends Archivo {
         this.cantCopiasDisponibles = cantCopiasDisponibles;
         this.fechaPublicacion = fechaPublicacion;
         this.editorial = editorial;
+        
+        if (super.archivoExite(ControladorAchivos.PATH_DIRECTORIO_LIBROS + File.separatorChar + this.codigoLibro)) {
+            Libro libroExistente = (Libro)ControladorAchivos.cargarArchivo(ControladorAchivos.PATH_DIRECTORIO_LIBROS + File.separatorChar + this.codigoLibro)
+            libroExistente.setCantCopiasDisponibles(cantCopiasDisponibles);
+            throw new LibreriaException("El libro ya esta registrado en la biblioteca se actualizo el registro de libros disponibles en la biblioteca");
 
-        File archivo
+        } else {
+            super.actualizar();
+        }
 
     }
 
@@ -70,6 +75,11 @@ public class Libro extends Archivo {
             default:
                 return ControladorAchivos.ERROR;
         }
+    }
+    
+    public void devolverLibro() throws LibreriaException{
+        cantCopiasDisponibles++;
+        super.actualizar();
     }
     
     //GETERS 
@@ -108,29 +118,33 @@ public class Libro extends Archivo {
     }
     
     //SETTERS
-
-    public void setTitulo(String titulo) {
+    public void setTitulo(String titulo) throws LibreriaException {
         this.titulo = titulo;
+        super.actualizar();
     }
 
     public void setAutor(String autor) {
         this.autor = autor;
     }
 
-    public void setCodigoLibro(String codigoLibro) {
+    public void setCodigoLibro(String codigoLibro) throws LibreriaException {
         this.codigoLibro = codigoLibro;
+        super.actualizar();
     }
 
-    public void setCantCopiasDisponibles(int cantCopiasDisponibles) {
-        this.cantCopiasDisponibles = cantCopiasDisponibles;
+    public void setCantCopiasDisponibles(int cantCopiasDisponibles) throws LibreriaException {
+        this.cantCopiasDisponibles += cantCopiasDisponibles;
+        super.actualizar();
     }
 
-    public void setFechaPublicacion(int anio, int mes, int dia) {
+    public void setFechaPublicacion(int anio, int mes, int dia) throws LibreriaException {
         this.fechaPublicacion = LocalDate.of(anio, mes, dia);
+        super.actualizar();
     }
 
-    public void setEditorial(String editorial) {
+    public void setEditorial(String editorial) throws LibreriaException {
         this.editorial = editorial;
+        super.actualizar();
     }
     
     //FILTRAR LISTA DE LIBROS

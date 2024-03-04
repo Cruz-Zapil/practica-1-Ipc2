@@ -24,6 +24,8 @@ public class Estudiante extends Archivo {
     private ArrayList<String> codigoLibrosPrestados = new ArrayList<>();
     private ArrayList<Prestamo> prestamosRealizados = new ArrayList<>();
     
+    public Estudiante (){ }
+
     public Estudiante(String carnet, String nombre, int carrera, LocalDate fechaNacimiento) throws LibreriaException {
         this.carnet = carnet;
         this.nombre = nombre;
@@ -31,15 +33,13 @@ public class Estudiante extends Archivo {
         this.fechaNacimiento = fechaNacimiento;
         super.codigo = carnet;
         
-        File archivo = new File(ControladorAchivos.PATH_DIRECTORIO_ESTUDIANTES + File.separatorChar + this.carnet);
-        if ( archivo.exists()) {
+        if ( super.archivoExite(ControladorAchivos.PATH_DIRECTORIO_ESTUDIANTES + File.separatorChar + this.carnet)) {
             throw new LibreriaException("El estudiante ya esta registrado en la biblioteca");
         } else {
             super.actualizar();
         }
     }
-
-       
+   
     public int setAtributos(String[] textoLeido, int tipoArchivo){
 
          switch (textoLeido[0]) {
@@ -87,13 +87,15 @@ public class Estudiante extends Archivo {
     }
     
     /*El estudiante devuelve el libro se elimina el registro en el arreglo de codigos de libros prestados*/
-    public void actualizarRegistroAlDevolverLibro(String codigoLibroADevolver){
+    public void actualizarRegistroAlDevolverLibro(String codigoLibroADevolver) throws LibreriaException{
         
         for (String codigoLibrosPrestado : codigoLibrosPrestados) {
             
             if (codigoLibrosPrestado.equals(codigoLibroADevolver)) {
                 codigoLibrosPrestados.remove(codigoLibroADevolver);
+                super.actualizar();
             }
+            
         }
     }
 
@@ -116,10 +118,6 @@ public class Estudiante extends Archivo {
     
     public String getCarnet(){
         return carnet;
-    }
-
-    public Estudiante (){
-        
     }
 
     @Override
@@ -150,14 +148,16 @@ public class Estudiante extends Archivo {
         ArrayList<Libro> librosPrestados = new ArrayList<>();
         
         for (String codigo : codigoLibrosPrestados) {
-            System.out.println(codigo);
         }
         
         for (String codigoLibro : codigoLibrosPrestados) {
             
             Libro libroPrestado = (Libro)ControladorAchivos.cargarArchivo(
                 ControladorAchivos.PATH_DIRECTORIO_LIBROS + File.separatorChar + codigoLibro);
+            
+            System.out.println(codigoLibro);
             librosPrestados.add(libroPrestado);
+
         }
         return librosPrestados;
     }

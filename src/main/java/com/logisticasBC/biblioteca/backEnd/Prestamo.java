@@ -16,8 +16,8 @@ import java.util.ArrayList;
 public class Prestamo extends Archivo {
 
     private static final long serialVersionUID = 1654741963498410L;
-    public final static int MORA_A_COBRAR = 5;
-    public final static int PRECIO_ALQUILER_LIBRO = 10;
+    public final static int MORA_A_COBRAR = 10;
+    public final static int PRECIO_ALQUILER_LIBRO = 5;
     public final static int MAX_DIAS_SIN_MORA = 3;
     public final static int MAX_A_PAGAR = (MAX_DIAS_SIN_MORA * PRECIO_ALQUILER_LIBRO);
     
@@ -28,9 +28,10 @@ public class Prestamo extends Archivo {
     //METODOS
     public Prestamo(){}
 
-    public Prestamo(String codigoLibro, String carnetEstudiante, LocalDate fechaPrestamo) {
+    public Prestamo(String codigoLibro, String carnetEstudiante, LocalDate fechaPrestamo) throws LibreriaException {
         this.codigoLibro = codigoLibro;
         this.carnetEstudiante = carnetEstudiante;
+        this.codigo = this.codigoLibro + "+" + this.carnetEstudiante;
         this.fechaPrestamo = fechaPrestamo;
         actualizarPrestamo();
     }
@@ -80,21 +81,26 @@ public class Prestamo extends Archivo {
         return prestamoMoroso;
     }
     
-    //se calcula el pago a pagar 
+    //se calcula el monto a pagar 
     public int calcularPago(){
+        
         int cantidadPago = 0;
         
         LocalDate fechaActual = LocalDate.now();
         
-        long diasDelPrestamo = ChronoUnit.DAYS.between(
-                fechaActual, fechaPrestamo);
+        long diasDelPrestamo = ChronoUnit.DAYS.between(fechaPrestamo, fechaActual);
         
         int dias = (int)diasDelPrestamo;
 
+        if (dias < 0) {
+            dias *= -1;
+        }
+
         //se calcula la cantidad a pagar
+        System.out.println("fecha prestamo: "+fechaPrestamo+" fecha hoy: " + fechaActual + "dias entre fechas: "+dias);
         if (dias > MAX_DIAS_SIN_MORA) {
-            
-            cantidadPago = MAX_A_PAGAR + (dias * MORA_A_COBRAR);
+
+            cantidadPago = MAX_A_PAGAR + ((dias - MAX_DIAS_SIN_MORA) * MORA_A_COBRAR);
         } else {
             
             cantidadPago = dias * PRECIO_ALQUILER_LIBRO;
@@ -103,6 +109,18 @@ public class Prestamo extends Archivo {
         return cantidadPago;
     }
     
+    //Actualizar los registros del estudiante y del libro cuando se devuelve un libro
+    public void devolverLibro() throws LibreriaException{
+        Estudiante estudiante = (Estudiante) ControladorAchivos.cargarArchivo(
+            ControladorAchivos.PATH_DIRECTORIO_ESTUDIANTES + File.separatorChar + carnetEstudiante);
+
+        Libro libro = (Libro) ControladorAchivos.cargarArchivo(
+            ControladorAchivos.PATH_DIRECTORIO_LIBROS + File.separatorChar + codigoLibro);
+
+        estudiante.actualizarRegistroAlDevolverLibro(codigoLibro);
+        libro.devolverLibro();
+    }
+
     //Actualizar Datos del estudiante que realizo el prestamo
     public void actualizarPrestamo () throws LibreriaException {
         
@@ -149,10 +167,38 @@ public class Prestamo extends Archivo {
     }
     
     //FILTROS (PARTE DE LOS REPORTES)
-    public static ArrayList<Prestamo> filtarPrestamosPor(){
-        ArrayList<Prestamo> prestamos = new ArrayList<Prestamo>();
-        
+    public static ArrayList<Prestamo> prestamosQueVencenHoy() throws LibreriaException {
+       
+        ArrayList<Prestamo> prestamos = ListarFiltrarArchivos.getPrestamos();
+        ArrayList<Prestamo> listaFiltrada = new ArrayList<>();
+
+        for (Prestamo prestamo : prestamos) {
+            
+            LocalDate fechaPrestamo = prestamo.getFechaPrestamo();
+            LocalDate fechaHoy = LocalDate.now();
+            int diasDelPrestamo = (int) ChronoUnit.DAYS.between(fechaHoy, fechaPrestamo);
+
+            if (diasDelPrestamo == MAX_DIAS_SIN_MORA) {
+                listaFiltrada.add(prestamo);
+            }
+
+
+        }
         return prestamos;
-        
+    }
+
+    public static ArrayList<Prestamo> prestamosMorosos() throws LibreriaException {
+       
+        ArrayList<Prestamo> prestamos = ListarFiltrarArchivos.getPrestamos();
+        ArrayList<Prestamo> listaFiltrada = new ArrayList<>();
+
+        for (Prestamo prestamo : prestamos) {
+
+            if (prestamo.prestamoMoroso()) {
+                listaFiltrada.add(prestamo);
+            }
+
+        }
+        return prestamos;
     }
 }

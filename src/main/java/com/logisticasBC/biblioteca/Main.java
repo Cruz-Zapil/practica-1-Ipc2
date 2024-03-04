@@ -10,6 +10,7 @@ import com.logisticasBC.biblioteca.backEnd.Estudiante;
 import com.logisticasBC.biblioteca.backEnd.LibreriaException;
 import com.logisticasBC.biblioteca.backEnd.Libro;
 import com.logisticasBC.biblioteca.backEnd.ListarFiltrarArchivos;
+import com.logisticasBC.biblioteca.backEnd.Prestamo;
 import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.VentanaPrincipal;
 
 public class Main  {
@@ -23,30 +24,42 @@ public class Main  {
         
         try {
            String ruta = "C:"+File.separatorChar+"Users"+File.separatorChar+"Personal"+File.separatorChar+"Documents"+File.separatorChar+"data.txt";
-           ControladorAchivos.leerArchivoTxt(ruta);
-    //        System.out.println("archivo de texto leido");
+           //ControladorAchivos.leerArchivoTxt(ruta);
+           //ArrayList<Prestamo> prestamosMorosos = Prestamo.prestamosMorosos();
+           //System.out.println("PRESTAMOS MOROSOS");
 
-    //      ArrayList<Libro> libros = Libro.filtrarPorTitulo("L");
-    //    
-    //      for (Libro libro : libros) {  
-    //           System.out.println(libro.getTitulo() + " " + libro.getCodigoLibro());
-    //      }
-    //      System.out.println(" ");
-    //       System.out.println("listado de estudiantes filtrados por carrera");
+           /*for (Prestamo prestamo : prestamosMorosos) {
+                System.out.println(prestamo.getCarneEstudiante() +" "+ prestamo.getCodigoLibro() + " Cant a pagar: " + prestamo.calcularPago());
+           }*/
+
+           ArrayList<Estudiante> estudiantes = ListarFiltrarArchivos.getEstudiantes();
+           
+           for (Estudiante estudiante : estudiantes) {
+
+                System.out.println(estudiante.getNombre() + " " + estudiante.getCarnet());
+                ArrayList<Libro> libros = estudiante.getLibrosPrestados();
+                System.out.println(libros.size());
+           }
+           
+           Prestamo prestamo = 
+                (Prestamo)ControladorAchivos.cargarArchivo(
+                    ControladorAchivos.PATH_DIRECTORIO_PRESTAMOS + File.separatorChar + "040-DEF+00198763");
+           
+           System.out.println(prestamo.getCodigo());
+           
+           prestamo.devolverLibro();
+
+            System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-");
+            System.out.println("   PRESTAMO ELIMINADO");
+            System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-");
             
-    //            ArrayList<Estudiante> estudiantes = ListarFiltrarArchivos.getEstudiantes();
-    //            for (Estudiante estudiante : estudiantes) {
-    //                System.out.println("");
-    //                System.out.println(estudiante.getNombre());
-    //                System.out.println("LIBROS QUE HA PRESTADO EL ESTUDIANTE");
-    //                ArrayList<Libro> librosDelEstudiante = estudiante.getLibrosPrestados();
-    //                System.out.println(librosDelEstudiante.size());
-    //                for (Libro libroDelEstudiante : librosDelEstudiante) {
-    //                    System.out.println(libroDelEstudiante.getTitulo() );
-    //                }
-    //            }
-        Estudiante estudiante = new Estudiante("00123456", "Brigido", 0, LocalDate.now());
+            for (Estudiante estudiante : estudiantes) {
 
+                System.out.println(estudiante.getNombre() + " " + estudiante.getCarnet());
+                ArrayList<Libro> libros = estudiante.getLibrosPrestados();
+                System.out.println(libros.size());
+           }
+   
         } catch (LibreriaException e) {
             e.getMessage();
             e.printStackTrace();
