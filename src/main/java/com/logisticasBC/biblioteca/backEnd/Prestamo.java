@@ -28,7 +28,7 @@ public class Prestamo extends Archivo {
     //METODOS
     public Prestamo(){}
 
-    public Prestamo(String codigoLibro, String carnetEstudiante, LocalDate fechaPrestamo) {
+    public Prestamo(String codigoLibro, String carnetEstudiante, LocalDate fechaPrestamo) throws LibreriaException {
         this.codigoLibro = codigoLibro;
         this.carnetEstudiante = carnetEstudiante;
         this.fechaPrestamo = fechaPrestamo;
@@ -144,12 +144,17 @@ public class Prestamo extends Archivo {
         this.carnetEstudiante = carnetEstudiante;
     }
 
+    
     public void setFechaPrestamo( int anio, int mes, int dia) {
         this.fechaPrestamo = LocalDate.of(anio, mes, dia);
     }
     
+
+    
+    /* 
     //FILTROS (PARTE DE LOS REPORTES)
-    public static ArrayList<Prestamo>(){
+    public static ArrayList<Prestamo>() {
 
     }
+    */
 }

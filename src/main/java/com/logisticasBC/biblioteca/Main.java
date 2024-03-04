@@ -10,6 +10,7 @@ import com.logisticasBC.biblioteca.backEnd.Estudiante;
 import com.logisticasBC.biblioteca.backEnd.LibreriaException;
 import com.logisticasBC.biblioteca.backEnd.Libro;
 import com.logisticasBC.biblioteca.backEnd.ListarFiltrarArchivos;
+import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.VentanaPath;
 import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.VentanaPrincipal;
 
 public class Main  {
@@ -18,10 +19,16 @@ public class Main  {
     public static void main( String[] args )
     {
         System.out.println( "Hello World!" );
+
+        new VentanaPrincipal();
        
+      //  new VentanaPath();
+
+      //  ControladorAchivos.crearDirectorios();
 
         //VentanaPrincipal inicio = new VentanaPrincipal();
         
+        /*
         try {
            String ruta = "C:"+File.separatorChar+"Users"+File.separatorChar+"Personal"+File.separatorChar+"Documents"+File.separatorChar+"data.txt";
         //    /////////
@@ -54,6 +61,7 @@ public class Main  {
             e.printStackTrace();
         }
        
+        */
        
     }
 
