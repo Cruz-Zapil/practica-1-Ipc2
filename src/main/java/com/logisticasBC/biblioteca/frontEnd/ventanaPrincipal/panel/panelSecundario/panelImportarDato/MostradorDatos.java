@@ -15,14 +15,14 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 
-public class PanelPrestamo extends JPanel {
+public class MostradorDatos extends JPanel {
 
     public static DefaultTableModel model;
 
     private ArrayList<String> datosColumna = new ArrayList<>();
     private ArrayList<ArrayList< String>> datosFila= new ArrayList<>();
 
-    public PanelPrestamo(ArrayList<String> datosColumna, ArrayList<ArrayList<String>> datosFila, int y_pos) {
+    public MostradorDatos(ArrayList<String> datosColumna, ArrayList<ArrayList<String>> datosFila, int y_pos) {
 
         this.datosColumna = datosColumna;
         this.datosFila = datosFila;
