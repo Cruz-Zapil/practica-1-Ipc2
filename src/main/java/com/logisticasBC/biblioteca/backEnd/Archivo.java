@@ -6,6 +6,8 @@ package com.logisticasBC.biblioteca.backEnd;
 
 import java.io.Serializable;
 
+import com.gargoylesoftware.htmlunit.javascript.host.file.File;
+
 /**
  *
  * @author Personal
@@ -25,5 +27,7 @@ public abstract class Archivo implements Serializable{
     
     public void actualizar () throws LibreriaException{
             ControladorAchivos.guardarArchivo(this);
+    }
+    
     }
 }
