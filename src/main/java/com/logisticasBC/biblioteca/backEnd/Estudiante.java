@@ -20,9 +20,16 @@ public class Estudiante extends Archivo {
     private String nombre;
     private int carrera;
     private LocalDate fechaNacimiento;
-    
     private ArrayList<String> codigoLibrosPrestados = new ArrayList();
     private ArrayList<Prestamo> prestamosRealizados = new ArrayList<>();
+
+    public Estudiante(String carnet, String nombre, int carrera, LocalDate fechaNacimiento) {
+        
+        this.carnet = carnet;
+        this.nombre = nombre;
+        this.carrera = carrera;
+        this.fechaNacimiento = fechaNacimiento;
+    }
        
     public int setAtributos(String[] textoLeido, int tipoArchivo){
 
@@ -105,13 +112,6 @@ public class Estudiante extends Archivo {
 
     public Estudiante (){
         
-    }
-
-    public Estudiante(String carnet, String nombre, int carrera, LocalDate fechaNacimiento) {
-        this.carnet = carnet;
-        this.nombre = nombre;
-        this.carrera = carrera;
-        this.fechaNacimiento = fechaNacimiento;
     }
 
     @Override
