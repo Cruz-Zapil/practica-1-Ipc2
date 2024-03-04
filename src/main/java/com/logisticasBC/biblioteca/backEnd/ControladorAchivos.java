@@ -6,9 +6,11 @@ package com.logisticasBC.biblioteca.backEnd;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
@@ -133,8 +135,8 @@ public class ControladorAchivos {
                         }
                         
                         break;
-                    default:
-                        
+                    
+                        default:
                     if (!textoLeido.trim().isEmpty()) {
                         lineasMalLeidas.add(textoLeido);
                     }
@@ -144,11 +146,13 @@ public class ControladorAchivos {
 
 
             }
+           
+            actualizarDatosPrestamos();
 
             return lineasMalLeidas; 
             
         } catch (Exception e) {
-            throw new LibreriaException("Error al cargar los dastos del archivo de texto");
+            throw new LibreriaException("Error al cargar los datos del archivo de texto");
         }
 
     }
@@ -162,10 +166,38 @@ public class ControladorAchivos {
         ){
             binarioJugador.writeObject(archivo);
             binarioJugador.close();
-        } catch (IOException e) {
+        }
+            catch (IOException e) {
             throw new LibreriaException("Error al guardar el archivo");
             
         }
     }
+    
+    public static Archivo cargarArchivo (String ruta) throws LibreriaException{
+
+
+        File archivo = new File(ruta);
+
+        try (
+              FileInputStream fileInmputStream = new FileInputStream(archivo);
+              ObjectInputStream objectoImputStream = new ObjectInputStream(fileInmputStream);
+        ) {
+            
+             Archivo archivoLeido = (Archivo)objectoImputStream.readObject();
+             return archivoLeido;
+            
+        } catch (IOException |ClassNotFoundException e) {
+           throw new LibreriaException("Error al leer los datos del Archivo");
+        }
+    }
+    
+    public static void actualizarDatosPrestamos() throws LibreriaException {
+        
+        ArrayList <Prestamo> prestamos = ListarFiltrarArchivos.getPrestamos();
+        for (Prestamo prestamo : prestamos) {
+            prestamo.actualizarPrestamo();
              
+        }
+    }
+    
 }

@@ -13,7 +13,17 @@ import java.io.Serializable;
 
 public abstract class Archivo implements Serializable{
     
+        
+    
     protected String codigo;
     
     public abstract String getPath();
+
+    public String getCodigo (){
+        return codigo;
+    }
+    
+    public void actualizar () throws LibreriaException{
+            ControladorAchivos.guardarArchivo(this);
+    }
 }

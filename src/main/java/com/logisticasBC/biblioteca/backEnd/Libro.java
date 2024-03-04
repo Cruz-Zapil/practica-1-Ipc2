@@ -4,8 +4,10 @@
  */
 package com.logisticasBC.biblioteca.backEnd;
 
+import com.vaadin.shared.ui.datefield.LocalDateFieldState;
 import java.io.File;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 
 /**
@@ -14,6 +16,22 @@ import java.time.LocalDate;
  */
 public class Libro extends Archivo {
     
+    public Libro (){
+        
+    }
+
+    public Libro(String titulo, String autor, String codigoLibro, int cantCopiasDisponibles, LocalDate fechaPublicacion,
+            String editorial) {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.codigoLibro = codigoLibro;
+        this.cantCopiasDisponibles = cantCopiasDisponibles;
+        this.fechaPublicacion = fechaPublicacion;
+        this.editorial = editorial;
+    }
+
+    private static final long serialVersionUID = 16549498498410L;
+
     private String titulo;
     private String autor;
     private String codigoLibro;
@@ -50,6 +68,7 @@ public class Libro extends Archivo {
         }
     }
     
+    //GETERS 
     public boolean copiasDisponibles(){
         
         return cantCopiasDisponibles != 0;
@@ -84,5 +103,60 @@ public class Libro extends Archivo {
         return ControladorAchivos.PATH_DIRECTORIO_LIBROS + File.separatorChar + super.codigo;
     }
     
+    //SETTERS
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public void setCodigoLibro(String codigoLibro) {
+        this.codigoLibro = codigoLibro;
+    }
+
+    public void setCantCopiasDisponibles(int cantCopiasDisponibles) {
+        this.cantCopiasDisponibles = cantCopiasDisponibles;
+    }
+
+    public void setFechaPublicacion(int anio, int mes, int dia) {
+        this.fechaPublicacion = LocalDate.of(anio, mes, dia);
+    }
+
+    public void setEditorial(String editorial) {
+        this.editorial = editorial;
+    }
+    
+    //FILTRAR LISTA DE LIBROS
+    public static ArrayList <Libro> filtrarPorCodigo (String filtro ) throws LibreriaException {
+
+        ArrayList <Libro> listaLibros = ListarFiltrarArchivos.getLibros();
+        ArrayList <Libro> listaFiltrada = new ArrayList<>();
+
+        for (Libro libro : listaLibros) {
+            if (libro.getCodigoLibro().startsWith(filtro)) {
+                
+                listaFiltrada.add(libro);
+            }
+        }
+        ListarFiltrarArchivos.ordenarListaLibros(listaFiltrada);
+        return listaFiltrada;
+    }
+
+    public static ArrayList<Libro> filtrarPorTitulo(String filtro) throws LibreriaException {
+
+        ArrayList <Libro> listaLibros = ListarFiltrarArchivos.getLibros();
+        ArrayList <Libro> listaFiltrada = new ArrayList<>();
+
+        for (Libro libro : listaLibros) {
+            if (libro.getTitulo().startsWith(filtro)) {
+                listaFiltrada.add(libro);
+            }
+        }
+
+        return listaFiltrada;
+    }
     
 }
