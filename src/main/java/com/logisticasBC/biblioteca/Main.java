@@ -25,49 +25,45 @@ public class Main  {
         try {
            String ruta = "C:"+File.separatorChar+"Users"+File.separatorChar+"Personal"+File.separatorChar+"Documents"+File.separatorChar+"data.txt";
            //ControladorAchivos.leerArchivoTxt(ruta);
-           //ArrayList<Prestamo> prestamosMorosos = Prestamo.prestamosMorosos();
-           //System.out.println("PRESTAMOS MOROSOS");
-
-           /*for (Prestamo prestamo : prestamosMorosos) {
-                System.out.println(prestamo.getCarneEstudiante() +" "+ prestamo.getCodigoLibro() + " Cant a pagar: " + prestamo.calcularPago());
-           }*/
-
-           ArrayList<Estudiante> estudiantes = ListarFiltrarArchivos.getEstudiantes();
            
-           for (Estudiante estudiante : estudiantes) {
-
-                System.out.println(estudiante.getNombre() + " " + estudiante.getCarnet());
-                ArrayList<Libro> libros = estudiante.getLibrosPrestados();
-                System.out.println(libros.size());
-           }
-           
-           Prestamo prestamo = 
-                (Prestamo)ControladorAchivos.cargarArchivo(
-                    ControladorAchivos.PATH_DIRECTORIO_PRESTAMOS + File.separatorChar + "040-DEF+00198763");
-           
+           System.out.println("DEVOLVER LIBRO");
+           Prestamo prestamo = (Prestamo) ControladorAchivos.cargarArchivo(
+            ControladorAchivos.PATH_DIRECTORIO_PRESTAMOS + File.separatorChar + "040-DEF+00198763"
+           );
+           System.out.println("DATOS DEL PRESTAMO");
            System.out.println(prestamo.getCodigo());
+           System.out.println("DATOS DEL ESTUDIANTE");
+           Estudiante estudiante = (Estudiante)ControladorAchivos.cargarArchivo(ControladorAchivos.PATH_DIRECTORIO_ESTUDIANTES + File.separatorChar + prestamo.getCarneEstudiante());
+           System.out.println(estudiante.getNombre() + " " + estudiante.getCarnet());
+           System.out.println(estudiante.getLibrosPrestados().size());
+           System.out.println("DATOS LIBRO");
+           Libro libro = (Libro) ControladorAchivos.cargarArchivo(ControladorAchivos.PATH_DIRECTORIO_LIBROS + File.separatorChar + prestamo.getCodigoLibro());
+           System.out.println(libro.getTitulo() + " " + libro.getCodigoLibro());
+           System.out.println("copias disponibles: "+libro.getCantCopiasDisponibles());
            
            prestamo.devolverLibro();
 
-            System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-");
-            System.out.println("   PRESTAMO ELIMINADO");
-            System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-");
-            
-            for (Estudiante estudiante : estudiantes) {
+           System.out.println("");
+           System.out.println("DATOS DEL PRESTAMO ACTUALIZADO");
+           System.out.println(prestamo.getCodigo());
 
-                System.out.println(estudiante.getNombre() + " " + estudiante.getCarnet());
-                ArrayList<Libro> libros = estudiante.getLibrosPrestados();
-                System.out.println(libros.size());
-           }
-   
+           System.out.println("DATOS DEL ESTUDIANTE");
+
+           Estudiante estudiante1 = (Estudiante)ControladorAchivos.cargarArchivo(ControladorAchivos.PATH_DIRECTORIO_ESTUDIANTES + File.separatorChar + prestamo.getCarneEstudiante());
+           System.out.println(estudiante1.getNombre() + " " + estudiante1.getCarnet());
+           System.out.println(estudiante1.getLibrosPrestados().size());
+           System.out.println("DATOS LIBRO");
+           Libro libro1 = (Libro) ControladorAchivos.cargarArchivo(ControladorAchivos.PATH_DIRECTORIO_LIBROS + File.separatorChar + prestamo.getCodigoLibro());
+           System.out.println(libro1.getTitulo() + " " + libro1.getCodigoLibro());
+           System.out.println("copias disponibles: "+libro1.getCantCopiasDisponibles());
+           estudiante1.actualizar();
+           libro1.actualizar();
+
         } catch (LibreriaException e) {
             e.getMessage();
             e.printStackTrace();
         }
        
-       
-        
-
     }
 
    

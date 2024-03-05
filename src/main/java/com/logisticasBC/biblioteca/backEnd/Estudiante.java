@@ -88,15 +88,11 @@ public class Estudiante extends Archivo {
     
     /*El estudiante devuelve el libro se elimina el registro en el arreglo de codigos de libros prestados*/
     public void actualizarRegistroAlDevolverLibro(String codigoLibroADevolver) throws LibreriaException{
-        
-        for (String codigoLibrosPrestado : codigoLibrosPrestados) {
-            
-            if (codigoLibrosPrestado.equals(codigoLibroADevolver)) {
-                codigoLibrosPrestados.remove(codigoLibroADevolver);
-                super.actualizar();
-            }
-            
-        }
+       System.out.println(); 
+        System.out.println(codigoLibrosPrestados.remove(codigoLibroADevolver));
+        System.out.println(codigoLibrosPrestados.remove(codigoLibroADevolver));
+        System.out.println();
+        super.actualizar();
     }
 
     //GETTERS
@@ -147,13 +143,10 @@ public class Estudiante extends Archivo {
 
         ArrayList<Libro> librosPrestados = new ArrayList<>();
         
-        for (String codigo : codigoLibrosPrestados) {
-        }
-        
         for (String codigoLibro : codigoLibrosPrestados) {
             
             Libro libroPrestado = (Libro)ControladorAchivos.cargarArchivo(
-                ControladorAchivos.PATH_DIRECTORIO_LIBROS + File.separatorChar + codigoLibro);
+                  ControladorAchivos.PATH_DIRECTORIO_LIBROS + File.separatorChar + codigoLibro);
             
             System.out.println(codigoLibro);
             librosPrestados.add(libroPrestado);
@@ -210,4 +203,5 @@ public class Estudiante extends Archivo {
         ListarFiltrarArchivos.ordenarListaEstudiantes(listaFiltrada);
         return listaFiltrada;
    }
+
 }

@@ -24,6 +24,7 @@ public class Prestamo extends Archivo {
     private String codigoLibro;
     private String carnetEstudiante;
     private LocalDate fechaPrestamo;
+    private boolean prestamoActivo = true;
     
     //METODOS
     public Prestamo(){}
@@ -111,14 +112,18 @@ public class Prestamo extends Archivo {
     
     //Actualizar los registros del estudiante y del libro cuando se devuelve un libro
     public void devolverLibro() throws LibreriaException{
+
         Estudiante estudiante = (Estudiante) ControladorAchivos.cargarArchivo(
             ControladorAchivos.PATH_DIRECTORIO_ESTUDIANTES + File.separatorChar + carnetEstudiante);
 
         Libro libro = (Libro) ControladorAchivos.cargarArchivo(
             ControladorAchivos.PATH_DIRECTORIO_LIBROS + File.separatorChar + codigoLibro);
 
+        
         estudiante.actualizarRegistroAlDevolverLibro(codigoLibro);
         libro.devolverLibro();
+        prestamoActivo = false;
+        super.actualizar();
     }
 
     //Actualizar Datos del estudiante que realizo el prestamo
@@ -148,6 +153,10 @@ public class Prestamo extends Archivo {
         return fechaPrestamo;
     }
     
+    public boolean isPrestamoActivo (){
+        return prestamoActivo;
+    }
+
      @Override
     public String getPath() {
         return ControladorAchivos.PATH_DIRECTORIO_PRESTAMOS + File.separatorChar + super.codigo;
@@ -201,4 +210,5 @@ public class Prestamo extends Archivo {
         }
         return prestamos;
     }
+
 }

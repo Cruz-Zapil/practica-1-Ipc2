@@ -162,10 +162,11 @@ public class ControladorAchivos {
         File archivoJugador = new File(archivo.getPath());
         
         try ( FileOutputStream fileOutputStream = new FileOutputStream(archivoJugador);
-              ObjectOutputStream binarioJugador = new ObjectOutputStream(fileOutputStream);
+              ObjectOutputStream archivoBinario = new ObjectOutputStream(fileOutputStream);
         ){
-            binarioJugador.writeObject(archivo);
-            binarioJugador.close();
+            archivoBinario.writeObject(archivo);
+            archivoBinario.close();
+            System.out.println("archivo guardado exitosamente " + archivo.getPath());
         }
             catch (IOException e) {
             throw new LibreriaException("Error al guardar el archivo");

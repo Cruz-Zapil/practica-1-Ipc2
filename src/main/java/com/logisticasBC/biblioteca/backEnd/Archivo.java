@@ -26,8 +26,11 @@ public abstract class Archivo implements Serializable {
     }
     
     public void actualizar () throws LibreriaException{
-            ControladorAchivos.guardarArchivo(this);
+            
+        ControladorAchivos.guardarArchivo(this);
+        
     }
+
 
     protected boolean archivoExite (String ruta){
         

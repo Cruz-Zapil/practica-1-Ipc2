@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class Libro extends Archivo {
 
     private static final long serialVersionUID = 16549498498410L;
-
+    
     private String titulo;
     private String autor;
     private String codigoLibro;
