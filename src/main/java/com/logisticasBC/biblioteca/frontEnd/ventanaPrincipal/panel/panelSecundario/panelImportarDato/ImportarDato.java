@@ -1,8 +1,11 @@
 package com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecundario.panelImportarDato;
 
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
+
+import org.vaadin.addon.borderlayout.BorderLayout;
 
 import com.logisticasBC.biblioteca.backEnd.ControladorAchivos;
 import com.logisticasBC.biblioteca.backEnd.LibreriaException;
@@ -89,7 +92,16 @@ public class ImportarDato extends ConstructorPanelS implements ActionListener {
     private void addAreaTexto() {
 
         erorres.setBounds(60, 460, 600, 150);
-        this.add(erorres);
+        erorres.setEditable(false);
+
+        // Crear JScrollPane para manejar el desplazamiento del texto
+        JScrollPane scrollPane = new JScrollPane(erorres);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setBounds(60, 460, 600, 150);
+
+        // Agregar el JScrollPane a la ventana
+        this.add(scrollPane);
+
 
         ArrayList<String> holi = new ArrayList<>();
         ArrayList<ArrayList<String>> filas = new ArrayList<>();
@@ -124,7 +136,12 @@ public class ImportarDato extends ConstructorPanelS implements ActionListener {
             
                 try {
                     
-                    ControladorAchivos.leerArchivoTxt(tmp);
+                    ArrayList<String> datos = ControladorAchivos.leerArchivoTxt(tmp);
+
+                    for (String linea : datos) {
+                        erorres.append(linea + "\n"); // Agregar cada línea al JTextArea
+                    }
+                    
                     ListarFiltrarArchivos.getEstudiantes();
 
                 } catch (LibreriaException e) {

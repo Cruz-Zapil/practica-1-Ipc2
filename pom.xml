@@ -1,5 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.logisticasBC.biblioteca</groupId>
   <artifactId>Biblioteca_Cunoc</artifactId>
@@ -37,7 +39,19 @@
     </dependency>
 
 
+  <!-- https://mvnrepository.com/artifact/org.swinglabs.swingx/swingx-all -->
+<dependency>
+    <groupId>org.swinglabs.swingx</groupId>
+    <artifactId>swingx-all</artifactId>
+    <version>1.6.3</version>
+</dependency>
+
+
+
   </dependencies>
+
+
+
 
 
 <repositories>
@@ -45,6 +59,8 @@
         <id>vaadin-addons</id>
         <url>https://maven.vaadin.com/vaadin-addons</url>
     </repository>
+
+
 </repositories>
 
 
@@ -62,35 +78,11 @@
         </configuration>
       </plugin>
     
-      <plugin>
-        <groupId>org.antlr</groupId>
-        <artifactId>antlr4-maven-plugin</artifactId>
-        <version>4.3</version>
-        <executions>
-          <execution>
-            <id>antlr</id>
-            <phase>generated-sources</phase>
-            <goals>
-              <goal>antlr4</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    
-      <plugin>
-        <groupId>de.jflex</groupId>
-        <artifactId>jflex-maven-plugin</artifactId>
-        <version>1.8.2</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>generate</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+         
+      
 
       <plugin>
+
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
         <executions>
