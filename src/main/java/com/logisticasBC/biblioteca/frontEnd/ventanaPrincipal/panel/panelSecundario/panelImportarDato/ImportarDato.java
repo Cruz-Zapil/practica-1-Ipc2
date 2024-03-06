@@ -5,8 +5,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 
-import org.vaadin.addon.borderlayout.BorderLayout;
-
 import com.logisticasBC.biblioteca.backEnd.ControladorAchivos;
 import com.logisticasBC.biblioteca.backEnd.LibreriaException;
 import com.logisticasBC.biblioteca.backEnd.ListarFiltrarArchivos;
@@ -120,7 +118,7 @@ public class ImportarDato extends ConstructorPanelS implements ActionListener {
         holi.add(" cuatro");
         holi.add(" cinco");
 
-        this.add(new MostradorDatos(holi, filas, 185));
+        this.add(new MostradorDatos( filas, 185));
 
     }
 

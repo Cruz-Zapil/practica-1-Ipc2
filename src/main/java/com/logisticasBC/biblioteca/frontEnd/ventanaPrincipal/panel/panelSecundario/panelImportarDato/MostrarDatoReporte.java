@@ -3,35 +3,36 @@ package com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecunda
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
-import javax.swing.BorderFactory;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-public class MostradorDatos extends JPanel {
+import com.vaadin.ui.ComboBox;
 
-    public static DefaultTableModel model;
+public class MostrarDatoReporte extends JPanel {
+
+    public DefaultTableModel model;
 
     private String[] columna = { "Libro", "Estudiante", "Devolucion" };
     private ArrayList<ArrayList<String>> datosFila = new ArrayList<>();
+    
+    private ComboBox filtros = new ComboBox();
 
-    public MostradorDatos(ArrayList<ArrayList<String>> datosFila, int y_pos) {
-
+    public MostrarDatoReporte(ArrayList<ArrayList<String>> datosFila) {
         this.datosFila = datosFila;
         this.setLayout(null);
-        this.setBounds(60, y_pos, 600, 220);
-        agregrarTabla();
-
+        this.setBounds(90, 300, 540, 320);
+        this.setBackground(new Color(255, 228, 181));
+        agregarTabla();
     }
 
-    public void agregrarTabla() {
-
+    public void agregarTabla() {
         model = new DefaultTableModel();
 
         for (String columnas : columna) {
@@ -51,16 +52,18 @@ public class MostradorDatos extends JPanel {
 
         // Personaliza el encabezado de la tabla
         JTableHeader header = table.getTableHeader();
-        header.setFont(new Font("Arial", Font.BOLD, 14));
-        header.setBackground(new Color(255, 182, 193));
-        header.setForeground(Color.black);
-
+        header.setPreferredSize(new Dimension(0, 0));
+        table.setTableHeader(header);
+        
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         scrollPane.setPreferredSize(new Dimension(500, 400));
-        scrollPane.setBounds(0, 0, 600, 220);
+        scrollPane.setBounds(0, 0, 540, 320);
+
+    
 
         this.add(scrollPane);
     }
 
+   
 }

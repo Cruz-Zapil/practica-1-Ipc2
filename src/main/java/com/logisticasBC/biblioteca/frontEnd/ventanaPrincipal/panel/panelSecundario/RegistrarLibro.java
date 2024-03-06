@@ -16,7 +16,6 @@ import com.logisticasBC.biblioteca.frontEnd.utilFrontEnd.Message;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -24,7 +23,7 @@ public class RegistrarLibro extends ConstructorPanelS implements ActionListener 
 
     private JLabel[] jLabel = new JLabel[6];
     private JTextField[] textField = new JTextField[6];
-    private String[] etiqueta = { "Código", " Titulo", "Autor","Fecha Publicacion", "Cant. Copias", "Editorial" };
+    private String[] etiqueta = { "Código", " Titulo", "Autor", "Fecha Publicacion", "Cant. Copias", "Editorial" };
     private JXDatePicker datePicker;
 
     public RegistrarLibro() {
@@ -59,39 +58,34 @@ public class RegistrarLibro extends ConstructorPanelS implements ActionListener 
 
             /// agregando JTextField
 
+            textField[i] = new JTextField();
+            textField[i].setBounds(x_posField, y_posField, 180, 30);
+            y_posField = y_posField + 90;
 
-                
-                textField[i] = new JTextField();
-                textField[i].setBounds(x_posField, y_posField, 180, 30);
-                y_posField = y_posField + 90;
+            if (i == 2) {
+                x_posField = x_posField + 290;
+                y_posField = 230;
+            }
 
-                if (i == 2) {
-                    x_posField = x_posField + 290;
-                    y_posField = 230;
-                }
-                
-                
-            
-            
-            if(i == 2) {
+            if (i == 2) {
                 System.out.println(" reando calendario ");
 
-            // agregando calendario
-            datePicker = new JXDatePicker();
-            datePicker.setDate(Calendar.getInstance().getTime());
-            datePicker.setFormats(new SimpleDateFormat("dd/MM/yyyy"));
-            datePicker.setBounds(x_posField, y_posField, 180, 30);
+                // agregando calendario
+                datePicker = new JXDatePicker();
+                datePicker.setDate(Calendar.getInstance().getTime());
+                datePicker.setFormats(new SimpleDateFormat("dd/MM/yyyy"));
+                datePicker.setBounds(x_posField, y_posField, 180, 30);
 
-            this.add(datePicker);
+                this.add(datePicker);
 
-            System.out.println(" creando ");
+                System.out.println(" creando ");
             }
-            
-            if(i!=3){
+
+            if (i != 3) {
 
                 this.add(textField[i]);
             }
-            
+
             this.add(jLabel[i]);
         }
     }
@@ -116,7 +110,6 @@ public class RegistrarLibro extends ConstructorPanelS implements ActionListener 
     @Override
     public void actionPerformed(ActionEvent event) {
 
-
         if (event.getSource() instanceof JButton) {
             JButton sourceButton = (JButton) event.getSource();
 
@@ -128,7 +121,8 @@ public class RegistrarLibro extends ConstructorPanelS implements ActionListener 
                         Date selectedDate = datePicker.getDate();
                         LocalDate localDate = selectedDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-                        new Libro(textField[1].getText(), textField[3].getText(),textField[0].getText(), 2, localDate,textField[5].getText());
+                        new Libro(textField[1].getText(), textField[3].getText(), textField[0].getText(), 2, localDate,
+                                textField[5].getText());
 
                         Message.mostrarMensajeInfo("Registro Guardado", "Nuevo Estudiante");
 
@@ -136,7 +130,7 @@ public class RegistrarLibro extends ConstructorPanelS implements ActionListener 
                         Message.mostrarMensajeError("Error de almacenado", "Error de Registro");
                         e.printStackTrace();
                     }
-                    
+
                 } else {
 
                     Message.mostrarMensajeError("Rellene bien los datos", "Error de Datos");
@@ -146,12 +140,11 @@ public class RegistrarLibro extends ConstructorPanelS implements ActionListener 
                 for (int i = 0; i < textField.length; i++) {
 
                     textField[i].setText("");
-                    
+
                 }
             }
         }
-    
-    
+
     }
 
 }

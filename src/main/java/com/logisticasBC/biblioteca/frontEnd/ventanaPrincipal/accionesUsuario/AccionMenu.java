@@ -7,11 +7,11 @@ import java.awt.event.ActionListener;
 import com.logisticasBC.biblioteca.frontEnd.utilFrontEnd.Message;
 import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.VentanaPrincipal;
 import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.botonMenu.ContruccionBoton;
-import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecundario.Devolucion;
 import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecundario.Prestamo;
 import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecundario.RegistrarEstudiante;
 import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecundario.RegistrarLibro;
 import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecundario.Reporte;
+import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecundario.develucion.Devolucion;
 import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecundario.panelImportarDato.ImportarDato;
 
 public class AccionMenu implements ActionListener {

@@ -1,4 +1,4 @@
-package com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecundario;
+package com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecundario.develucion;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import com.logisticasBC.biblioteca.backEnd.Libro;
+import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecundario.ConstructorPanelS;
 import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecundario.panelImportarDato.MostradorDatos;
 
 public class Devolucion extends ConstructorPanelS implements ActionListener {
@@ -97,7 +98,7 @@ public class Devolucion extends ConstructorPanelS implements ActionListener {
         holi.add(" cuatro");
         holi.add(" cinco");
 
-        this.add(new MostradorDatos(holi, filas, 310));
+        this.add(new MostradorDatos(filas, 310));
     }
 
     @Override
