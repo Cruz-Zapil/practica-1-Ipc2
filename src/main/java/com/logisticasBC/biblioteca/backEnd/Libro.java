@@ -4,7 +4,6 @@
  */
 package com.logisticasBC.biblioteca.backEnd;
 
-import com.vaadin.shared.ui.datefield.LocalDateFieldState;
 import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Personal
+ * @author BrigidoAlvarado
  */
 public class Libro extends Archivo {
 
@@ -176,5 +175,17 @@ public class Libro extends Archivo {
 
         return listaFiltrada;
     }
-    
+
+    public static ArrayList<Libro> filtrarPorAutor (String filtro) throws LibreriaException {
+
+        ArrayList <Libro> listaLibros = ListarFiltrarArchivos.getLibros();
+        ArrayList <Libro> listaFiltrada = new ArrayList<>();
+
+        for (Libro libro : listaFiltrada) {
+            if (libro.getAutor().startsWith(filtro)) {
+                listaFiltrada.add(libro);
+            }
+        }
+        return listaFiltrada;
+    }
 }

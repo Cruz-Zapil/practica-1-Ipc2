@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author Personal
+ * @author Brigido Alvarado
  */
 
 public abstract class Archivo implements Serializable {

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Personal
+ * @author Brigido Alvarado
  */
 public class Estudiante extends Archivo {
     private static final long serialVersionUID = 1698752310098498410L;
@@ -42,24 +42,28 @@ public class Estudiante extends Archivo {
    
     public int setAtributos(String[] textoLeido, int tipoArchivo){
 
-         switch (textoLeido[0]) {
+         try {
+            switch (textoLeido[0]) {
 
-             case "ESTUDIANTE":
-             return tipoArchivo;  
-
-             case "CARNET": carnet = textoLeido[1];
-                            super.codigo = textoLeido[1];
-                            
-             return tipoArchivo;
-
-             case "NOMBRE": nombre = textoLeido[1];
-                 return tipoArchivo;
-                 
-             case "CARRERA": carrera = Integer.parseInt(textoLeido[1]);
-                 return 0;
-                 
-            default:
-                return ControladorAchivos.ERROR;
+                case "ESTUDIANTE":
+                   return tipoArchivo;  
+   
+                case "CARNET": carnet = textoLeido[1];
+                               super.codigo = textoLeido[1];
+                               
+                return tipoArchivo;
+   
+                case "NOMBRE": nombre = textoLeido[1];
+                    return tipoArchivo;
+                    
+                case "CARRERA": carrera = Integer.parseInt(textoLeido[1]);
+                    return 0;
+                    
+               default:
+                   return ControladorAchivos.ERROR;
+            }
+         } catch (ArrayIndexOutOfBoundsException e) {
+            return ControladorAchivos.ERROR;
          }
     }
     
