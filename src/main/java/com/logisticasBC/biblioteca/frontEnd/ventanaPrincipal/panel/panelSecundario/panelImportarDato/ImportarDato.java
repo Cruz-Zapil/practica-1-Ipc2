@@ -105,12 +105,6 @@ public class ImportarDato extends ConstructorPanelS implements ActionListener {
         ArrayList<ArrayList<String>> filas = new ArrayList<>();
         filas.add(new ArrayList<>(List.of("Dato 1-1", "Dato 1-2", "datos")));
         filas.add(new ArrayList<>(List.of("Dato 2-1", "Dato 2-2")));
-        filas.add(new ArrayList<>(List.of("Dato 1-1", "Dato 1-2", "datos")));
-        filas.add(new ArrayList<>(List.of("Dato 2-1", "Dato 2-2")));
-        filas.add(new ArrayList<>(List.of("Dato 1-1", "Dato 1-2", "datos")));
-        filas.add(new ArrayList<>(List.of("Dato 2-1", "Dato 2-2")));
-        filas.add(new ArrayList<>(List.of("Dato 1-1", "Dato 1-2", "datos")));
-        filas.add(new ArrayList<>(List.of("Dato 2-1", "Dato 2-2")));
 
         holi.add(" uno");
         holi.add(" dos ");

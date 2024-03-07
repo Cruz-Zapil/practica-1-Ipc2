@@ -7,7 +7,12 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import com.logisticasBC.biblioteca.backEnd.ControladorAchivos;
+import com.logisticasBC.biblioteca.backEnd.LibreriaException;
 import com.logisticasBC.biblioteca.backEnd.Libro;
+import com.logisticasBC.biblioteca.backEnd.ListarFiltrarArchivos;
+import com.logisticasBC.biblioteca.frontEnd.utilFrontEnd.Directorio;
 import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecundario.ConstructorPanelS;
 import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecundario.panelImportarDato.MostradorDatos;
 
@@ -104,6 +109,26 @@ public class Devolucion extends ConstructorPanelS implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent event) {
         
+
+         if (event.getSource() instanceof JButton) {
+            JButton sourceButton = (JButton) event.getSource();
+
+            if (sourceButton.getText().equals("Buscar")) {
+
+               
+                System.out.println(" buscar ");
+            
+                
+
+            }else if (sourceButton.getText().equals( "Aceptar")) {
+                System.out.println(" hacer devolucion  ");
+
+            }else if (sourceButton.getText().equals( "Cancelar")){
+
+                System.out.println(" cancelar y limpiar ");
+            }
+
+        }
 
     }
 

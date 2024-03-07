@@ -2,20 +2,25 @@ package com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecunda
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 
-
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.JButton;
 
 public class Prestamo extends ConstructorPanelS implements ActionListener {
 
     // etiqueta
-    private JLabel[] labels = new JLabel[5];
+    private JLabel[] labels = new JLabel[7];
     private String[] etiqueta = { "Carné Estudiante", "Fecha Prestamo", "Info. Estudiante ", "Código Libro",
             "Info. Libro" };
     private String[] textBoton = { "Buscar", "Aceptar", "Cancelar" };
+    private JTextPane[] textAreaImput = new JTextPane[2];
 
     /// cuadro de texto
     private JTextField estudiante = new JTextField();
@@ -27,6 +32,8 @@ public class Prestamo extends ConstructorPanelS implements ActionListener {
         addEtiquetas();
         addJTextFiel();
         addButtons();
+        addFecha();
+        addInfo();
     }
 
     // componentes a agregar:
@@ -49,6 +56,9 @@ public class Prestamo extends ConstructorPanelS implements ActionListener {
             labels[i] = new JLabel(etiqueta[i]);
             labels[i].setLocation(x, y);
             labels[i].setSize(200, 30);
+
+            Font font = labels[i].getFont();
+            labels[i].setFont(new Font(font.getName(), font.getStyle(), 16));
             y = y + 90;
 
             if (i == 2) {
@@ -59,11 +69,45 @@ public class Prestamo extends ConstructorPanelS implements ActionListener {
         }
     }
 
+    private void addFecha() {
+        // Obtener la fecha actual
+        LocalDate fechaActual = LocalDate.now();
+
+        // Formatear la fecha como una cadena
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String fechaFormateada = fechaActual.format(formatter);
+
+        // Mostrar la fecha en el JLabel
+        labels[5] = new JLabel();
+        labels[5].setBounds(60, 320, 200, 30);
+        labels[5].setText(fechaFormateada);
+
+        Font font = labels[5].getFont();
+        labels[5].setFont(new Font(font.getName(), font.getStyle(), 18));
+
+        this.add(labels[5]);
+
+    }
+
+    private void addInfo() {
+
+        textAreaImput[0] = new JTextPane();
+        textAreaImput[0].setBounds(60,410,180,200);
+        textAreaImput[0].setEditable(false);
+    
+        this.add(textAreaImput[0]);
+
+
+        textAreaImput[1] = new JTextPane();
+        textAreaImput[1].setBounds(350,320,180,200);
+        textAreaImput[1].setEditable(false);
+        this.add(textAreaImput[1]);
+    }
+
     private void addJTextFiel() {
 
         estudiante.setBounds(60, 230, 180, 30);
         libro.setBounds(350, 230, 180, 30);
-
         this.add(estudiante);
         this.add(libro);
 
@@ -81,20 +125,33 @@ public class Prestamo extends ConstructorPanelS implements ActionListener {
         }
 
         botones[0].setBounds(570, 230, 90, 30);
-
         botones[1].setBounds(450, 620, 90, 30);
-
         botones[2].setBounds(570, 620, 90, 30);
-
-    }
-
-    private void addInfoLabels() {
 
     }
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        
+
+        if (event.getSource() instanceof JButton) {
+            JButton sourceButton = (JButton) event.getSource();
+
+            if (sourceButton.getText().equals("Buscar")) {
+
+                System.out.println("buscar los archivos ");
+
+            
+            }else if (sourceButton.getText().equals("Aceptar")){
+
+                System.out.println(" guardar archivo ");
+
+            }else if (sourceButton.getText().equals("Cancelar")){
+
+                System.out.println(" lipiar  ");
+
+            }
+
+        }
 
     }
 
