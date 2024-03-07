@@ -6,7 +6,7 @@ package com.logisticasBC.biblioteca.backEnd;
 
 /**
  *
- * @author Personal
+ * @author Brigido Alvarado
  */
 public class LibreriaException extends Exception{
 

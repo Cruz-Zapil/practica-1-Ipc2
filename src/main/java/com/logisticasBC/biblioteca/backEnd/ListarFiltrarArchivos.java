@@ -11,7 +11,7 @@ import java.util.Comparator;
 
 /**
  *
- * @author Personal
+ * @author Brigido Alvarado
  */
 public class ListarFiltrarArchivos {
   

@@ -4,7 +4,6 @@
  */
 package com.logisticasBC.biblioteca.backEnd;
 
-import com.vaadin.shared.ui.datefield.LocalDateFieldState;
 import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -12,12 +11,12 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Personal
+ * @author BrigidoAlvarado
  */
 public class Libro extends Archivo {
 
     private static final long serialVersionUID = 16549498498410L;
-
+    
     private String titulo;
     private String autor;
     private String codigoLibro;
@@ -25,9 +24,7 @@ public class Libro extends Archivo {
     private LocalDate fechaPublicacion;
     private String editorial;
 
-    public Libro (){
-        
-    }
+    public Libro (){    }
 
     public Libro(String titulo, String autor, String codigoLibro, int cantCopiasDisponibles, LocalDate fechaPublicacion, String editorial) throws LibreriaException {
         this.titulo = titulo;
@@ -37,11 +34,21 @@ public class Libro extends Archivo {
         this.cantCopiasDisponibles = cantCopiasDisponibles;
         this.fechaPublicacion = fechaPublicacion;
         this.editorial = editorial;
+        
+        if (super.archivoExite(ControladorAchivos.PATH_DIRECTORIO_LIBROS + File.separatorChar + this.codigoLibro)) {
+            Libro libroExistente = (Libro)ControladorAchivos.cargarArchivo(ControladorAchivos.PATH_DIRECTORIO_LIBROS + File.separatorChar + this.codigoLibro);
+            libroExistente.setCantCopiasDisponibles(cantCopiasDisponibles);
+            throw new LibreriaException("El libro ya esta registrado en la biblioteca se actualizo el registro de libros disponibles en la biblioteca");
 
+<<<<<<< HEAD
+        } else {
+            super.actualizar();
+        }
+=======
   
+>>>>>>> 9db60078edf64b6a84ed577575797766d8acd093
 
     }
-
     
     public int setAtributos(String[] textoLeido, int tipoArchivo){
         
@@ -72,6 +79,16 @@ public class Libro extends Archivo {
         }
     }
     
+    public void devolverLibro() throws LibreriaException{
+        cantCopiasDisponibles++;
+        super.actualizar();
+    }
+    
+    public void prestarLibro() throws LibreriaException {
+        cantCopiasDisponibles--;
+        super.actualizar();
+    }
+
     //GETERS 
     public boolean copiasDisponibles(){
         
@@ -108,29 +125,34 @@ public class Libro extends Archivo {
     }
     
     //SETTERS
-
-    public void setTitulo(String titulo) {
+    public void setTitulo(String titulo) throws LibreriaException {
         this.titulo = titulo;
+        super.actualizar();
     }
 
-    public void setAutor(String autor) {
+    public void setAutor(String autor) throws LibreriaException {
         this.autor = autor;
+        super.actualizar();
     }
 
-    public void setCodigoLibro(String codigoLibro) {
+    public void setCodigoLibro(String codigoLibro) throws LibreriaException {
         this.codigoLibro = codigoLibro;
+        super.actualizar();
     }
 
-    public void setCantCopiasDisponibles(int cantCopiasDisponibles) {
-        this.cantCopiasDisponibles = cantCopiasDisponibles;
+    public void setCantCopiasDisponibles(int cantCopiasDisponibles) throws LibreriaException {
+        this.cantCopiasDisponibles += cantCopiasDisponibles;
+        super.actualizar();
     }
 
-    public void setFechaPublicacion(int anio, int mes, int dia) {
+    public void setFechaPublicacion(int anio, int mes, int dia) throws LibreriaException {
         this.fechaPublicacion = LocalDate.of(anio, mes, dia);
+        super.actualizar();
     }
 
-    public void setEditorial(String editorial) {
+    public void setEditorial(String editorial) throws LibreriaException {
         this.editorial = editorial;
+        super.actualizar();
     }
     
     //FILTRAR LISTA DE LIBROS
@@ -162,5 +184,17 @@ public class Libro extends Archivo {
 
         return listaFiltrada;
     }
-    
+
+    public static ArrayList<Libro> filtrarPorAutor (String filtro) throws LibreriaException {
+
+        ArrayList <Libro> listaLibros = ListarFiltrarArchivos.getLibros();
+        ArrayList <Libro> listaFiltrada = new ArrayList<>();
+
+        for (Libro libro : listaFiltrada) {
+            if (libro.getAutor().startsWith(filtro)) {
+                listaFiltrada.add(libro);
+            }
+        }
+        return listaFiltrada;
+    }
 }

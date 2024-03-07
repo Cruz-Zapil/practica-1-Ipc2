@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Personal
+ * @author Brigido Alvarado
  */
 public class ControladorAchivos {
 
@@ -64,6 +64,7 @@ public class ControladorAchivos {
     public  static ArrayList<String> leerArchivoTxt(String pathArchivoTxt) throws LibreriaException{
         
         crearDirectorios();
+        
         tipoArchivo = 0;
         ArrayList<String> lineasMalLeidas = new ArrayList<String>();
         File archivoTexto = new File(pathArchivoTxt);
@@ -96,6 +97,7 @@ public class ControladorAchivos {
                             prestamo = new Prestamo();
                         break;
                 }
+                //se usa otro switch para clasificar y guardar la informacion dependiendo del tipo de archivo
                 switch (tipoArchivo) {
                     case LIBRO:
                         
@@ -123,17 +125,20 @@ public class ControladorAchivos {
                             estudiante = null;
                             lineasMalLeidas.add(textoLeido);
                         }
-                        
                         break;
                     
                     case PRESTAMO:
                         String[] infPrestamo = textoLeido.split(":");
                         tipoArchivo = prestamo.setAtributos(infPrestamo, tipoArchivo);
+                        
                         if (tipoArchivo == 0) {
                             guardarArchivo(prestamo);
                             prestamo = null;
+                        } else if (tipoArchivo == ERROR && !textoLeido.trim().isEmpty()) {
+                            tipoArchivo = 0;
+                            prestamo = null;
+                            lineasMalLeidas.add(textoLeido);
                         }
-                        
                         break;
                     
                         default:
@@ -152,9 +157,10 @@ public class ControladorAchivos {
             return lineasMalLeidas; 
             
         } catch (Exception e) {
+            
+            e.printStackTrace();
             throw new LibreriaException("Error al cargar los datos del archivo de texto");
         }
-
     }
     
     public static void guardarArchivo( Archivo archivo) throws LibreriaException{
@@ -162,12 +168,14 @@ public class ControladorAchivos {
         File archivoJugador = new File(archivo.getPath());
         
         try ( FileOutputStream fileOutputStream = new FileOutputStream(archivoJugador);
-              ObjectOutputStream binarioJugador = new ObjectOutputStream(fileOutputStream);
+              ObjectOutputStream archivoBinario = new ObjectOutputStream(fileOutputStream);
         ){
-            binarioJugador.writeObject(archivo);
-            binarioJugador.close();
+            archivoBinario.writeObject(archivo);
+            archivoBinario.close();
+            //System.out.println("archivo guardado exitosamente " + archivo.getPath());
         }
             catch (IOException e) {
+            e.printStackTrace();
             throw new LibreriaException("Error al guardar el archivo");
             
         }
@@ -195,7 +203,7 @@ public class ControladorAchivos {
         
         ArrayList <Prestamo> prestamos = ListarFiltrarArchivos.getPrestamos();
         for (Prestamo prestamo : prestamos) {
-            prestamo.actualizarPrestamo();
+            prestamo.aniadirLibroPrestamoAEstudiante();
              
         }
     }

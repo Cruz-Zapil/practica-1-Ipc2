@@ -3,6 +3,7 @@ package com.logisticasBC.biblioteca;
 import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.logisticasBC.biblioteca.backEnd.Archivo;
 import com.logisticasBC.biblioteca.backEnd.ControladorAchivos;
@@ -10,7 +11,6 @@ import com.logisticasBC.biblioteca.backEnd.Estudiante;
 import com.logisticasBC.biblioteca.backEnd.LibreriaException;
 import com.logisticasBC.biblioteca.backEnd.Libro;
 import com.logisticasBC.biblioteca.backEnd.ListarFiltrarArchivos;
-import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.VentanaPath;
 import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.VentanaPrincipal;
 
 public class Main  {
@@ -28,7 +28,6 @@ public class Main  {
 
         //VentanaPrincipal inicio = new VentanaPrincipal();
         
-        /*
         try {
            String ruta = "C:"+File.separatorChar+"Users"+File.separatorChar+"Personal"+File.separatorChar+"Documents"+File.separatorChar+"data.txt";
            ControladorAchivos.leerArchivoTxt(ruta);
@@ -60,8 +59,9 @@ public class Main  {
             e.printStackTrace();
         }
        
-        */
        
+        
+
     }
 
    

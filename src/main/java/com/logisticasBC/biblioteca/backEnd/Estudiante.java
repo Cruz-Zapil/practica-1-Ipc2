@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Personal
+ * @author Brigido Alvarado
  */
 public class Estudiante extends Archivo {
     private static final long serialVersionUID = 1698752310098498410L;
@@ -24,6 +24,8 @@ public class Estudiante extends Archivo {
     private ArrayList<String> codigoLibrosPrestados = new ArrayList<>();
     private ArrayList<Prestamo> prestamosRealizados = new ArrayList<>();
     
+    public Estudiante (){ }
+
     public Estudiante(String carnet, String nombre, int carrera, LocalDate fechaNacimiento) throws LibreriaException {
         this.carnet = carnet;
         this.nombre = nombre;
@@ -31,36 +33,43 @@ public class Estudiante extends Archivo {
         this.fechaNacimiento = fechaNacimiento;
         super.codigo = carnet;
         
+<<<<<<< HEAD
+        if ( super.archivoExite(ControladorAchivos.PATH_DIRECTORIO_ESTUDIANTES + File.separatorChar + this.carnet)) {
+=======
         File archivo = new File(ControladorAchivos.PATH_DIRECTORIO_ESTUDIANTES + File.separatorChar + this.carnet);
         
         if ( archivo.exists()) {
+>>>>>>> 9db60078edf64b6a84ed577575797766d8acd093
             throw new LibreriaException("El estudiante ya esta registrado en la biblioteca");
         } else {
             super.actualizar();
         }
     }
-
-       
+   
     public int setAtributos(String[] textoLeido, int tipoArchivo){
 
-         switch (textoLeido[0]) {
+         try {
+            switch (textoLeido[0]) {
 
-             case "ESTUDIANTE":
-             return tipoArchivo;  
-
-             case "CARNET": carnet = textoLeido[1];
-                            super.codigo = textoLeido[1];
-                            
-             return tipoArchivo;
-
-             case "NOMBRE": nombre = textoLeido[1];
-                 return tipoArchivo;
-                 
-             case "CARRERA": carrera = Integer.parseInt(textoLeido[1]);
-                 return 0;
-                 
-            default:
-                return ControladorAchivos.ERROR;
+                case "ESTUDIANTE":
+                   return tipoArchivo;  
+   
+                case "CARNET": carnet = textoLeido[1];
+                               super.codigo = textoLeido[1];
+                               
+                return tipoArchivo;
+   
+                case "NOMBRE": nombre = textoLeido[1];
+                    return tipoArchivo;
+                    
+                case "CARRERA": carrera = Integer.parseInt(textoLeido[1]);
+                    return 0;
+                    
+               default:
+                   return ControladorAchivos.ERROR;
+            }
+         } catch (ArrayIndexOutOfBoundsException e) {
+            return ControladorAchivos.ERROR;
          }
     }
     
@@ -80,7 +89,7 @@ public class Estudiante extends Archivo {
     }
     
     //Si el estudiante puede realilzar el prestamo el nuevo prestamo se guarda en el arrayList
-    public void actualizarRegistroAlRealizarPrestamo  (Prestamo nuevoPrestamo)throws LibreriaException{
+    public void aniadirPrestamo  (Prestamo nuevoPrestamo)throws LibreriaException{
       
         prestamosRealizados.add(nuevoPrestamo);
         codigoLibrosPrestados.add(nuevoPrestamo.getCodigoLibro());
@@ -88,14 +97,11 @@ public class Estudiante extends Archivo {
     }
     
     /*El estudiante devuelve el libro se elimina el registro en el arreglo de codigos de libros prestados*/
-    public void actualizarRegistroAlDevolverLibro(String codigoLibroADevolver){
-        
-        for (String codigoLibrosPrestado : codigoLibrosPrestados) {
-            
-            if (codigoLibrosPrestado.equals(codigoLibroADevolver)) {
-                codigoLibrosPrestados.remove(codigoLibroADevolver);
-            }
-        }
+    public void actualizarRegistroAlDevolverLibro(String codigoLibroADevolver) throws LibreriaException{
+        System.out.println("entrada");
+        //codigoLibrosPrestados.remove(codigoLibroADevolver);
+       System.out.println(codigoLibrosPrestados.remove(codigoLibroADevolver));
+       super.actualizar();
     }
 
     //GETTERS
@@ -117,10 +123,6 @@ public class Estudiante extends Archivo {
     
     public String getCarnet(){
         return carnet;
-    }
-
-    public Estudiante (){
-        
     }
 
     @Override
@@ -150,15 +152,14 @@ public class Estudiante extends Archivo {
 
         ArrayList<Libro> librosPrestados = new ArrayList<>();
         
-        for (String codigo : codigoLibrosPrestados) {
-            System.out.println(codigo);
-        }
-        
         for (String codigoLibro : codigoLibrosPrestados) {
             
             Libro libroPrestado = (Libro)ControladorAchivos.cargarArchivo(
-                ControladorAchivos.PATH_DIRECTORIO_LIBROS + File.separatorChar + codigoLibro);
+                  ControladorAchivos.PATH_DIRECTORIO_LIBROS + File.separatorChar + codigoLibro);
+            
+            System.out.println(codigoLibro);
             librosPrestados.add(libroPrestado);
+
         }
         return librosPrestados;
     }
@@ -211,4 +212,5 @@ public class Estudiante extends Archivo {
         ListarFiltrarArchivos.ordenarListaEstudiantes(listaFiltrada);
         return listaFiltrada;
    }
+
 }

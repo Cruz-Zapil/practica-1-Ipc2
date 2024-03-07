@@ -4,13 +4,14 @@
  */
 package com.logisticasBC.biblioteca.backEnd;
 
+import java.io.File;
 import java.io.Serializable;
 
-import com.gargoylesoftware.htmlunit.javascript.host.file.File;
+//import com.gargoylesoftware.htmlunit.javascript.host.file.File;
 
 /**
  *
- * @author Personal
+ * @author Brigido Alvarado
  */
 
 public abstract class Archivo implements Serializable {
@@ -25,7 +26,17 @@ public abstract class Archivo implements Serializable {
     }
     
     public void actualizar () throws LibreriaException{
-            ControladorAchivos.guardarArchivo(this);
+            
+        ControladorAchivos.guardarArchivo(this);
+        
+    }
+
+
+    protected boolean archivoExite (String ruta){
+        
+        File archivo = new File(ruta);
+        
+        return archivo.exists();
     }
 
 }
