@@ -71,9 +71,9 @@ public class ImportarDato extends ConstructorPanelS implements ActionListener {
         jlabel[0].setBounds(60, 160, 200, 30);
 
         jlabel[1] = new JLabel("Error de Registro");
-        jlabel[1].setBounds(60, 420, 200, 30);
+        jlabel[1].setBounds(60, 160, 200, 30);
 
-        this.add(jlabel[0]);
+        //this.add(jlabel[0]);
         this.add(jlabel[1]);
 
     }
@@ -95,24 +95,12 @@ public class ImportarDato extends ConstructorPanelS implements ActionListener {
         // Crear JScrollPane para manejar el desplazamiento del texto
         JScrollPane scrollPane = new JScrollPane(erorres);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollPane.setBounds(60, 460, 600, 150);
+        scrollPane.setBounds(60, 200, 600, 325);
 
         // Agregar el JScrollPane a la ventana
         this.add(scrollPane);
 
 
-        ArrayList<String> holi = new ArrayList<>();
-        ArrayList<ArrayList<String>> filas = new ArrayList<>();
-        filas.add(new ArrayList<>(List.of("Dato 1-1", "Dato 1-2", "datos")));
-        filas.add(new ArrayList<>(List.of("Dato 2-1", "Dato 2-2")));
-
-        holi.add(" uno");
-        holi.add(" dos ");
-        holi.add(" tres");
-        holi.add(" cuatro");
-        holi.add(" cinco");
-
-        this.add(new MostradorDatos( filas, 185));
 
     }
 

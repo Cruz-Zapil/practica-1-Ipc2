@@ -115,7 +115,7 @@ public class Prestamo extends Archivo {
             dineroRecaudadoSinMora = dias * PRECIO_ALQUILER_LIBRO;
         }
         if (dias==0) {
-            return 5;
+            dineroRecaudadoSinMora =5;
             
         }
         
@@ -345,16 +345,24 @@ public class Prestamo extends Archivo {
         }
         //caso 4 se indica el intervalo de tiempo
         else {
+            System.out.println(" provando el utlimo ");
             for (Prestamo prestamo : prestamos) {
 
-                if (!prestamo.isPrestamoActivo() && prestamo.getFechaPrestamo().isAfter(fechaInferior)  && prestamo.getFechaPrestamo().isBefore(fechaSuperior)) {
+                Estudiante estudiante = (Estudiante) ControladorAchivos.cargarArchivo(
+                    ControladorAchivos.PATH_DIRECTORIO_ESTUDIANTES + File.separatorChar + prestamo.getCarneEstudiante());
+                
+
+                if ( estudiante.getCarrera() == carrera && prestamo.getFechaPrestamo().isAfter(fechaInferior)  && prestamo.getFechaPrestamo().isBefore(fechaSuperior)) {
+                    System.out.println(prestamo);
+                    System.out.println(" holasdfkajsñdklfa");
                     listaFiltrada.add(prestamo);
                 }
     
             }
         }
+        System.out.println(" enviando info ");
        
-        return prestamos;
+        return listaFiltrada;
     }
 
     //CARGAR UN PRESTAMO
