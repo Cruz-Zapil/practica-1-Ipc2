@@ -61,8 +61,8 @@ public class ImportarDato extends ConstructorPanelS implements ActionListener {
         cancelar.setBounds(570, 620, 90, 30);
         cancelar.addActionListener(this);
 
-        this.add(aceptar);
-        this.add(cancelar);
+       // this.add(aceptar);
+      // this.add(cancelar);
         this.add(buscar);
 
         // agregando etiquetas
