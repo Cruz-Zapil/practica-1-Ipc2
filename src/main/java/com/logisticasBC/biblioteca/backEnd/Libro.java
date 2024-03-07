@@ -40,9 +40,13 @@ public class Libro extends Archivo {
             libroExistente.setCantCopiasDisponibles(cantCopiasDisponibles);
             throw new LibreriaException("El libro ya esta registrado en la biblioteca se actualizo el registro de libros disponibles en la biblioteca");
 
+<<<<<<< HEAD
         } else {
             super.actualizar();
         }
+=======
+  
+>>>>>>> 9db60078edf64b6a84ed577575797766d8acd093
 
     }
     

@@ -33,6 +33,7 @@ public class Prestamo extends Archivo {
     public Prestamo(){}
 
     public Prestamo(String codigoLibro, String carnetEstudiante, LocalDate fechaPrestamo) throws LibreriaException {
+    public Prestamo(String codigoLibro, String carnetEstudiante, LocalDate fechaPrestamo) throws LibreriaException {
         this.codigoLibro = codigoLibro;
         this.carnetEstudiante = carnetEstudiante;
         this.codigo = this.codigoLibro + "+" + this.carnetEstudiante + "+" + random();
@@ -201,9 +202,13 @@ public class Prestamo extends Archivo {
         this.carnetEstudiante = carnetEstudiante;
     }
 
+    
     public void setFechaPrestamo( int anio, int mes, int dia) {
         this.fechaPrestamo = LocalDate.of(anio, mes, dia);
     }
+    
+
+    
     
     //FILTROS (PARTE DE LOS REPORTES)
     public static ArrayList<Prestamo> prestamosQueVencenHoy() throws LibreriaException {
@@ -370,4 +375,5 @@ public class Prestamo extends Archivo {
 
         return prestamoBuscado;
     }
+    
 }

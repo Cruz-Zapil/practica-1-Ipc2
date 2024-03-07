@@ -3,19 +3,19 @@ package com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecunda
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.accionesUsuario.actionPanelSecundario.ActionPrestamo;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-public class Prestamo extends ConstructorPanelS {
+public class Prestamo extends ConstructorPanelS implements ActionListener {
 
     // etiqueta
     private JLabel[] labels = new JLabel[5];
     private String[] etiqueta = { "Carné Estudiante", "Fecha Prestamo", "Info. Estudiante ", "Código Libro",
             "Info. Libro" };
     private String[] textBoton = { "Buscar", "Aceptar", "Cancelar" };
-
-    private ActionPrestamo accionesBoton = new ActionPrestamo();
 
     /// cuadro de texto
     private JTextField estudiante = new JTextField();
@@ -75,7 +75,7 @@ public class Prestamo extends ConstructorPanelS {
 
         for (int i = 0; i < botones.length; i++) {
             botones[i] = new JButton();
-            botones[i].addActionListener(accionesBoton);
+            botones[i].addActionListener(this);
             botones[i].setText(textBoton[i]);
             this.add(botones[i]);
         }
@@ -89,6 +89,12 @@ public class Prestamo extends ConstructorPanelS {
     }
 
     private void addInfoLabels() {
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent event) {
+        
 
     }
 

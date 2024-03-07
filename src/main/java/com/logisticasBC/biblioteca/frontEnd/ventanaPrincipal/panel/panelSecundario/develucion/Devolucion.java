@@ -1,18 +1,17 @@
-package com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecundario;
+package com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecundario.develucion;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-
-import com.logisticasBC.biblioteca.backEnd.Estudiante;
 import com.logisticasBC.biblioteca.backEnd.Libro;
-import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.accionesUsuario.actionPanelSecundario.ActionDevolution;
+import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecundario.ConstructorPanelS;
 import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecundario.panelImportarDato.MostradorDatos;
 
-public class Devolucion extends ConstructorPanelS {
+public class Devolucion extends ConstructorPanelS implements ActionListener {
 
     /*
      * 3 botones
@@ -28,8 +27,6 @@ public class Devolucion extends ConstructorPanelS {
     private JTextField estudiante = new JTextField();
     private JTextField libro = new JTextField();
 
-    // agregnado accion
-    ActionDevolution ActionButtons = new ActionDevolution(); 
 
     public Devolucion() {
         super(" Devolucion ");
@@ -76,7 +73,7 @@ public class Devolucion extends ConstructorPanelS {
 
         for (int i = 0; i < botones.length; i++) {
             botones[i] = new JButton();
-            botones[i].addActionListener(ActionButtons);
+            botones[i].addActionListener(this);
             botones[i].setText(textBoton[i]);
             this.add(botones[i]);
         }
@@ -101,7 +98,13 @@ public class Devolucion extends ConstructorPanelS {
         holi.add(" cuatro");
         holi.add(" cinco");
 
-        this.add(new MostradorDatos(holi, filas, 310));
+        this.add(new MostradorDatos(filas, 310));
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent event) {
+        
+
     }
 
 }
