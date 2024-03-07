@@ -114,6 +114,10 @@ public class Prestamo extends Archivo {
             
             dineroRecaudadoSinMora = dias * PRECIO_ALQUILER_LIBRO;
         }
+        if (dias==0) {
+            return 5;
+            
+        }
         
         return dineroRecaudadoMora + dineroRecaudadoSinMora;
     }

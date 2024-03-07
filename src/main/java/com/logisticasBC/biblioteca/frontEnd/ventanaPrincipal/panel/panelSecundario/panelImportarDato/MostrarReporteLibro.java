@@ -24,8 +24,8 @@ public class MostrarReporteLibro extends JPanel {
        public MostrarReporteLibro(ArrayList<Libro> datosFila) {
    
         this.setLayout(null);
-        this.setBounds(90, 300, 540, 320);
-        this.setBackground(new Color(255, 228, 181));
+        this.setBounds(0,0, 600, 320);
+        this.setBackground(new Color(25, 228, 181));
         agregrarTabla(datosFila);
    
        }
@@ -60,8 +60,8 @@ public class MostrarReporteLibro extends JPanel {
 
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
-        scrollPane.setPreferredSize(new Dimension(500, 400));
-        scrollPane.setBounds(0, 0, 600, 220);
+        scrollPane.setPreferredSize(new Dimension(500, 500));
+        scrollPane.setBounds(0, 0, 600, 320);
 
         this.add(scrollPane);
     }

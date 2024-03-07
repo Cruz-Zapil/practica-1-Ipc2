@@ -124,7 +124,7 @@ public class PanelPrestamo extends ConstructorPanelS implements ActionListener {
 
     private void addButtons() {
 
-        JButton[] botones = new JButton[3];
+        botones = new JButton[3];
 
         for (int i = 0; i < botones.length; i++) {
             botones[i] = new JButton();
@@ -132,8 +132,8 @@ public class PanelPrestamo extends ConstructorPanelS implements ActionListener {
             botones[i].setText(textBoton[i]);
             this.add(botones[i]);
         }
-        botones[1].setEnabled(false);
 
+        botones[1].setEnabled(false);
         botones[0].setBounds(570, 230, 90, 30);
         botones[1].setBounds(450, 620, 90, 30);
         botones[2].setBounds(570, 620, 90, 30);
@@ -154,14 +154,16 @@ public class PanelPrestamo extends ConstructorPanelS implements ActionListener {
 
                     nomEstudiante = (Estudiante) ControladorAchivos.cargarArchivo(
                             ControladorAchivos.PATH_DIRECTORIO_ESTUDIANTES + File.separatorChar + estudiante.getText());
-                    textAreaImput[0].setText(nomEstudiante.getNombre());
+                    textAreaImput[0].setText("Nombre Estudiante: \n" + nomEstudiante.getNombre());
 
                     try {
 
                         nomLibro = (Libro) ControladorAchivos.cargarArchivo(
                                 ControladorAchivos.PATH_DIRECTORIO_LIBROS + File.separatorChar + libro.getText());
-                        textAreaImput[1].setText(nomLibro.getTitulo());
+                        textAreaImput[1].setText("Titulo del Libro: \n" + nomLibro.getTitulo());
+
                         botones[1].setEnabled(true);
+
                     } catch (LibreriaException e) {
 
                         Message.mostrarMensajeError(e.getMessage() + "al no encontrar el libro ", "Error ");
@@ -182,6 +184,10 @@ public class PanelPrestamo extends ConstructorPanelS implements ActionListener {
 
                         Prestamo nuevoPrestamo = new Prestamo(libro.getText(), estudiante.getText(), LocalDate.now());
                         ControladorAchivos.guardarArchivo(nuevoPrestamo);
+                        Message.mostrarMensajeInfo("Prestamo Realizado", "Prestamo");
+
+                        textAreaImput[0].setText("");
+                        textAreaImput[1].setText("");
 
                     } else {
                         Message.mostrarMensajeError("No tenemos Copias Disponibles del libro ", "Error");
@@ -194,6 +200,8 @@ public class PanelPrestamo extends ConstructorPanelS implements ActionListener {
             } else if (sourceButton.getText().equals("Cancelar")) {
 
                 System.out.println(" lipiar  ");
+                textAreaImput[0].setText("");
+                textAreaImput[1].setText("");
 
             }
 

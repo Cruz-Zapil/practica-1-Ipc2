@@ -123,7 +123,7 @@ public class Devolucion extends ConstructorPanelS implements ActionListener {
 
                     tmp.devolverLibro();
 
-                    Message.mostrarConfirmacion("Devolucion realizada","Devolucion");
+                    Message.mostrarMensajeInfo("Devolucion Realizada","Devolucion");
 
                 } catch (LibreriaException e) {
                     

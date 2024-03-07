@@ -12,31 +12,28 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-
-import com.logisticasBC.biblioteca.backEnd.Libro;
 import com.logisticasBC.biblioteca.backEnd.Prestamo;
 
 public class MostrarReportesPrestamo extends JPanel {
 
+    public static DefaultTableModel model;
+    String[] columna = { "Código Libro", "Carné Estudiante", "Fecha Prestamo", "Sin cancelar" };
 
-       public static DefaultTableModel model;       
-       String [] columna = {"Código","Titulo","Autor","Publicacion","Editorial"};
-   
-       public MostrarReportesPrestamo (ArrayList<Prestamo> datosFila) {
-   
+    public MostrarReportesPrestamo(ArrayList<Prestamo> datosFila) {
+
         this.setLayout(null);
-        this.setBounds(90, 300, 540, 320);
+        this.setBounds(0,0, 600, 420);
         this.setBackground(new Color(255, 228, 181));
         agregrarTabla(datosFila);
 
-   
-       }
-   
-
+    }
 
     public void agregrarTabla(ArrayList<Prestamo> envio) {
 
         model = new DefaultTableModel();
+        // Limpiar el modelo existente
+        model.setRowCount(0);
+
 
         for (String columnas : columna) {
             model.addColumn(columnas);
@@ -44,7 +41,8 @@ public class MostrarReportesPrestamo extends JPanel {
 
         // Agregar los datos de las filas al modelo de tabla
         for (Prestamo fila : envio) {
-            model.addRow(new Object[]{ fila.getCodigoLibro(),fila.getCarneEstudiante() , fila.getFechaPrestamo() , fila.isPrestamoActivo() });
+            model.addRow(new Object[] { fila.getCodigoLibro(), fila.getCarneEstudiante(), fila.getFechaPrestamo(),
+                    fila.isPrestamoActivo() });
         }
 
         JTable table = new JTable(model);
@@ -62,10 +60,9 @@ public class MostrarReportesPrestamo extends JPanel {
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         scrollPane.setPreferredSize(new Dimension(500, 400));
-        scrollPane.setBounds(0, 0, 600, 220);
+        scrollPane.setBounds(0, 0, 600, 320);
 
         this.add(scrollPane);
     }
 
-    
 }
