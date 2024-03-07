@@ -98,9 +98,6 @@ public class VentanaPath extends JFrame implements ActionListener {
 
                Message.mostrarMensajeError("Seleccione una carpeta valida ","Error de selecion ");
             }
-
         }
-
     }
-
 }

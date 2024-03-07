@@ -6,33 +6,34 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-import com.vaadin.ui.ComboBox;
 
-public class MostrarDatoReporte extends JPanel {
+import com.logisticasBC.biblioteca.backEnd.Estudiante;
+import com.logisticasBC.biblioteca.backEnd.Libro;
 
-    public DefaultTableModel model;
+public class MostrarReporteEstudiante extends JPanel {
 
-    private String[] columna = { "Libro", "Estudiante", "Devolucion" };
-    private ArrayList<ArrayList<String>> datosFila = new ArrayList<>();
-    
-    private ComboBox filtros = new ComboBox();
-
-    public MostrarDatoReporte(ArrayList<ArrayList<String>> datosFila) {
-        this.datosFila = datosFila;
+       public static DefaultTableModel model;       
+       String [] columna = {"Código","Titulo","Autor","Publicacion","Editorial"};
+   
+       public MostrarReporteEstudiante (ArrayList<Estudiante> datosFila) {
+   
         this.setLayout(null);
         this.setBounds(90, 300, 540, 320);
         this.setBackground(new Color(255, 228, 181));
-        agregarTabla();
-    }
+        agregrarTabla(datosFila);
+   
+       }
+   
 
-    public void agregarTabla() {
+
+    public void agregrarTabla(ArrayList<Estudiante> envio) {
+
         model = new DefaultTableModel();
 
         for (String columnas : columna) {
@@ -40,8 +41,10 @@ public class MostrarDatoReporte extends JPanel {
         }
 
         // Agregar los datos de las filas al modelo de tabla
-        for (ArrayList<String> fila : datosFila) {
-            model.addRow(fila.toArray());
+        for (Estudiante fila : envio) {
+
+            model.addRow(new Object[]{ fila.getCarnet() ,fila.getNombre(),fila.getCarrera() , fila.getFechaNacimiento() });
+                
         }
 
         JTable table = new JTable(model);
@@ -52,18 +55,16 @@ public class MostrarDatoReporte extends JPanel {
 
         // Personaliza el encabezado de la tabla
         JTableHeader header = table.getTableHeader();
-        header.setPreferredSize(new Dimension(0, 0));
-        table.setTableHeader(header);
-        
+        header.setFont(new Font("Arial", Font.BOLD, 14));
+        header.setBackground(new Color(255, 182, 193));
+        header.setForeground(Color.black);
+
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         scrollPane.setPreferredSize(new Dimension(500, 400));
-        scrollPane.setBounds(0, 0, 540, 320);
-
-    
+        scrollPane.setBounds(0, 0, 600, 220);
 
         this.add(scrollPane);
     }
-
-   
+        
 }

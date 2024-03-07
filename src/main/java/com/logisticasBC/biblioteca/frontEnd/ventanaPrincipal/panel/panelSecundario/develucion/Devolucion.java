@@ -2,19 +2,17 @@ package com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecunda
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 
-import com.logisticasBC.biblioteca.backEnd.ControladorAchivos;
 import com.logisticasBC.biblioteca.backEnd.LibreriaException;
-import com.logisticasBC.biblioteca.backEnd.Libro;
-import com.logisticasBC.biblioteca.backEnd.ListarFiltrarArchivos;
-import com.logisticasBC.biblioteca.frontEnd.utilFrontEnd.Directorio;
+import com.logisticasBC.biblioteca.backEnd.Prestamo;
+import com.logisticasBC.biblioteca.frontEnd.utilFrontEnd.Message;
 import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecundario.ConstructorPanelS;
-import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecundario.panelImportarDato.MostradorDatos;
+
 
 public class Devolucion extends ConstructorPanelS implements ActionListener {
 
@@ -31,14 +29,15 @@ public class Devolucion extends ConstructorPanelS implements ActionListener {
     private JLabel[] label = new JLabel[3];
     private JTextField estudiante = new JTextField();
     private JTextField libro = new JTextField();
-
+    private JTextPane mostrarInfo = new JTextPane();
+    private Prestamo tmp  = new Prestamo();
 
     public Devolucion() {
         super(" Devolucion ");
 
         addEtiquetas();
         addJTextFiel();
-        //addTabla();
+        // addTabla();
         addButtons();
     }
 
@@ -67,8 +66,12 @@ public class Devolucion extends ConstructorPanelS implements ActionListener {
         estudiante.setBounds(60, 230, 180, 30);
         libro.setBounds(350, 230, 180, 30);
 
+        mostrarInfo.setBounds(60, 350, 200, 250);
+        mostrarInfo.setEditable(false);
+
         this.add(estudiante);
         this.add(libro);
+        this.add(mostrarInfo);
 
     }
 
@@ -84,52 +87,56 @@ public class Devolucion extends ConstructorPanelS implements ActionListener {
         }
 
         botones[0].setBounds(570, 230, 90, 30);
-
         botones[1].setBounds(450, 620, 90, 30);
-
         botones[2].setBounds(570, 620, 90, 30);
 
     }
 
-    private void addTabla(Libro envio ) {
-
-        ArrayList<String> holi = new ArrayList<>();
-        ArrayList<ArrayList<String>> filas = new ArrayList<>();
-      // filas.add(new ArrayList<>(List.of(envio.getAutor(), envio.getCodigo()  )));
-
-        holi.add(" uno");
-        holi.add(" dos ");
-        holi.add(" tres");
-        holi.add(" cuatro");
-        holi.add(" cinco");
-
-        this.add(new MostradorDatos(filas, 310));
-    }
-
     @Override
     public void actionPerformed(ActionEvent event) {
-        
 
-         if (event.getSource() instanceof JButton) {
+        if (event.getSource() instanceof JButton) {
             JButton sourceButton = (JButton) event.getSource();
 
             if (sourceButton.getText().equals("Buscar")) {
 
-               
-                System.out.println(" buscar ");
-            
+                try {
+
+                    tmp = Prestamo.cargarPrestamoActivo(estudiante.getText(), libro.getText());
+
+                    int cant = tmp.calcularPago();
+
+                    label[1].setText("Total a pagar: " + cant);
+
+                    mostrarInfo.setText("Total a pagar sin mora: " + tmp.getDineroRecaudadoSinMora() + "\n"
+                            + "Total a pagar con Mora: " + tmp.getDineroRecaudadoMora());
+
+                } catch (LibreriaException e) {
+
+                    e.printStackTrace();
+                }
+
+            } else if (sourceButton.getText().equals("Aceptar")) {
+
                 
+                try {
 
-            }else if (sourceButton.getText().equals( "Aceptar")) {
-                System.out.println(" hacer devolucion  ");
+                    tmp.devolverLibro();
 
-            }else if (sourceButton.getText().equals( "Cancelar")){
+                    Message.mostrarConfirmacion("Devolucion realizada","Devolucion");
+
+                } catch (LibreriaException e) {
+                    
+                    e.printStackTrace();
+                }
+
+              
+
+            } else if (sourceButton.getText().equals("Cancelar")) {
 
                 System.out.println(" cancelar y limpiar ");
             }
-
         }
-
     }
 
 }

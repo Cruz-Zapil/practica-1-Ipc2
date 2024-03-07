@@ -63,7 +63,7 @@ public class ControladorAchivos {
     
     public  static ArrayList<String> leerArchivoTxt(String pathArchivoTxt) throws LibreriaException{
         
-        crearDirectorios();
+       
         
         tipoArchivo = 0;
         ArrayList<String> lineasMalLeidas = new ArrayList<String>();
@@ -144,12 +144,8 @@ public class ControladorAchivos {
                         default:
                     if (!textoLeido.trim().isEmpty()) {
                         lineasMalLeidas.add(textoLeido);
-                    }
-                    
-                        
+                    }       
                 }
-
-
             }
            
             actualizarDatosPrestamos();
@@ -160,6 +156,7 @@ public class ControladorAchivos {
             
             e.printStackTrace();
             throw new LibreriaException("Error al cargar los datos del archivo de texto");
+
         }
     }
     
@@ -194,8 +191,9 @@ public class ControladorAchivos {
              Archivo archivoLeido = (Archivo)objectoImputStream.readObject();
              return archivoLeido;
             
-        } catch (IOException |ClassNotFoundException e) {
-           throw new LibreriaException("Error al leer los datos del Archivo");
+        } catch (IOException |ClassNotFoundException e) { 
+
+           throw new LibreriaException("Error");
         }
     }
     

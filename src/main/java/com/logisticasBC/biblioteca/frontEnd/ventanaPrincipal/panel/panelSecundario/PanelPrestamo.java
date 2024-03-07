@@ -4,16 +4,23 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
+import com.logisticasBC.biblioteca.backEnd.ControladorAchivos;
+import com.logisticasBC.biblioteca.backEnd.Estudiante;
+import com.logisticasBC.biblioteca.backEnd.LibreriaException;
+import com.logisticasBC.biblioteca.backEnd.Libro;
+import com.logisticasBC.biblioteca.backEnd.Prestamo;
+import com.logisticasBC.biblioteca.frontEnd.utilFrontEnd.Message;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import javax.swing.JButton;
 
-public class Prestamo extends ConstructorPanelS implements ActionListener {
+public class PanelPrestamo extends ConstructorPanelS implements ActionListener {
 
     // etiqueta
     private JLabel[] labels = new JLabel[7];
@@ -21,12 +28,15 @@ public class Prestamo extends ConstructorPanelS implements ActionListener {
             "Info. Libro" };
     private String[] textBoton = { "Buscar", "Aceptar", "Cancelar" };
     private JTextPane[] textAreaImput = new JTextPane[2];
+    private Estudiante nomEstudiante;
+    private Libro nomLibro;
+    JButton[] botones = new JButton[3];
 
     /// cuadro de texto
     private JTextField estudiante = new JTextField();
     private JTextField libro = new JTextField();
 
-    public Prestamo() {
+    public PanelPrestamo() {
         super("Nuevo Prestamo");
         this.setLayout(null);
         addEtiquetas();
@@ -92,14 +102,13 @@ public class Prestamo extends ConstructorPanelS implements ActionListener {
     private void addInfo() {
 
         textAreaImput[0] = new JTextPane();
-        textAreaImput[0].setBounds(60,410,180,200);
+        textAreaImput[0].setBounds(60, 410, 180, 200);
         textAreaImput[0].setEditable(false);
-    
+
         this.add(textAreaImput[0]);
 
-
         textAreaImput[1] = new JTextPane();
-        textAreaImput[1].setBounds(350,320,180,200);
+        textAreaImput[1].setBounds(350, 320, 180, 200);
         textAreaImput[1].setEditable(false);
         this.add(textAreaImput[1]);
     }
@@ -123,6 +132,7 @@ public class Prestamo extends ConstructorPanelS implements ActionListener {
             botones[i].setText(textBoton[i]);
             this.add(botones[i]);
         }
+        botones[1].setEnabled(false);
 
         botones[0].setBounds(570, 230, 90, 30);
         botones[1].setBounds(450, 620, 90, 30);
@@ -140,12 +150,48 @@ public class Prestamo extends ConstructorPanelS implements ActionListener {
 
                 System.out.println("buscar los archivos ");
 
-            
-            }else if (sourceButton.getText().equals("Aceptar")){
+                try {
 
-                System.out.println(" guardar archivo ");
+                    nomEstudiante = (Estudiante) ControladorAchivos.cargarArchivo(
+                            ControladorAchivos.PATH_DIRECTORIO_ESTUDIANTES + File.separatorChar + estudiante.getText());
+                    textAreaImput[0].setText(nomEstudiante.getNombre());
 
-            }else if (sourceButton.getText().equals("Cancelar")){
+                    try {
+
+                        nomLibro = (Libro) ControladorAchivos.cargarArchivo(
+                                ControladorAchivos.PATH_DIRECTORIO_LIBROS + File.separatorChar + libro.getText());
+                        textAreaImput[1].setText(nomLibro.getTitulo());
+                        botones[1].setEnabled(true);
+                    } catch (LibreriaException e) {
+
+                        Message.mostrarMensajeError(e.getMessage() + "al no encontrar el libro ", "Error ");
+                    }
+
+                } catch (LibreriaException e) {
+
+                    Message.mostrarMensajeError(e.getMessage() + "al no encontrar el estudiante ", "Error ");
+                }
+
+            } else if (sourceButton.getText().equals("Aceptar")) {
+
+                try {
+
+                    nomEstudiante.prestamosDisponible(libro.getText());
+
+                    if (nomLibro.getCantCopiasDisponibles() > 0) {
+
+                        Prestamo nuevoPrestamo = new Prestamo(libro.getText(), estudiante.getText(), LocalDate.now());
+                        ControladorAchivos.guardarArchivo(nuevoPrestamo);
+
+                    } else {
+                        Message.mostrarMensajeError("No tenemos Copias Disponibles del libro ", "Error");
+                    }
+                } catch (LibreriaException e) {
+
+                    Message.mostrarMensajeError(e.getMessage(), "Error");
+                }
+
+            } else if (sourceButton.getText().equals("Cancelar")) {
 
                 System.out.println(" lipiar  ");
 

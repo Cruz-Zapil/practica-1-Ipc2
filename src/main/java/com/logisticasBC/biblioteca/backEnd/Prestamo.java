@@ -32,7 +32,7 @@ public class Prestamo extends Archivo {
     //METODOS
     public Prestamo(){}
 
-    public Prestamo(String codigoLibro, String carnetEstudiante, LocalDate fechaPrestamo) throws LibreriaException {
+
     public Prestamo(String codigoLibro, String carnetEstudiante, LocalDate fechaPrestamo) throws LibreriaException {
         this.codigoLibro = codigoLibro;
         this.carnetEstudiante = carnetEstudiante;

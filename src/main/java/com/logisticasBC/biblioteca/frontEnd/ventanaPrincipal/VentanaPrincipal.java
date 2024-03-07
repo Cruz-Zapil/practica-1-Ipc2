@@ -2,13 +2,11 @@ package com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.lang.reflect.Constructor;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.PanelMenu;
-import com.logisticasBC.biblioteca.frontEnd.ventanaPrincipal.panel.panelSecundario.ConstructorPanelS;
 
 public class VentanaPrincipal extends JFrame {
 

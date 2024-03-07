@@ -33,13 +33,9 @@ public class Estudiante extends Archivo {
         this.fechaNacimiento = fechaNacimiento;
         super.codigo = carnet;
         
-<<<<<<< HEAD
-        if ( super.archivoExite(ControladorAchivos.PATH_DIRECTORIO_ESTUDIANTES + File.separatorChar + this.carnet)) {
-=======
         File archivo = new File(ControladorAchivos.PATH_DIRECTORIO_ESTUDIANTES + File.separatorChar + this.carnet);
         
         if ( archivo.exists()) {
->>>>>>> 9db60078edf64b6a84ed577575797766d8acd093
             throw new LibreriaException("El estudiante ya esta registrado en la biblioteca");
         } else {
             super.actualizar();
