@@ -45,7 +45,6 @@ public class Libro extends Archivo {
         }
 
     }
-
     
     public int setAtributos(String[] textoLeido, int tipoArchivo){
         
@@ -81,6 +80,11 @@ public class Libro extends Archivo {
         super.actualizar();
     }
     
+    public void prestarLibro() throws LibreriaException {
+        cantCopiasDisponibles--;
+        super.actualizar();
+    }
+
     //GETERS 
     public boolean copiasDisponibles(){
         
@@ -122,8 +126,9 @@ public class Libro extends Archivo {
         super.actualizar();
     }
 
-    public void setAutor(String autor) {
+    public void setAutor(String autor) throws LibreriaException {
         this.autor = autor;
+        super.actualizar();
     }
 
     public void setCodigoLibro(String codigoLibro) throws LibreriaException {

@@ -83,7 +83,7 @@ public class Estudiante extends Archivo {
     }
     
     //Si el estudiante puede realilzar el prestamo el nuevo prestamo se guarda en el arrayList
-    public void actualizarRegistroAlRealizarPrestamo  (Prestamo nuevoPrestamo)throws LibreriaException{
+    public void aniadirPrestamo  (Prestamo nuevoPrestamo)throws LibreriaException{
       
         prestamosRealizados.add(nuevoPrestamo);
         codigoLibrosPrestados.add(nuevoPrestamo.getCodigoLibro());
@@ -92,11 +92,10 @@ public class Estudiante extends Archivo {
     
     /*El estudiante devuelve el libro se elimina el registro en el arreglo de codigos de libros prestados*/
     public void actualizarRegistroAlDevolverLibro(String codigoLibroADevolver) throws LibreriaException{
-       System.out.println(); 
-        System.out.println(codigoLibrosPrestados.remove(codigoLibroADevolver));
-        System.out.println(codigoLibrosPrestados.remove(codigoLibroADevolver));
-        System.out.println();
-        super.actualizar();
+        System.out.println("entrada");
+        //codigoLibrosPrestados.remove(codigoLibroADevolver);
+       System.out.println(codigoLibrosPrestados.remove(codigoLibroADevolver));
+       super.actualizar();
     }
 
     //GETTERS

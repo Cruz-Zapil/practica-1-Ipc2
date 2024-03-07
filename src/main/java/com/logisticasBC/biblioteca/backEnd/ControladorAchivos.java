@@ -203,7 +203,7 @@ public class ControladorAchivos {
         
         ArrayList <Prestamo> prestamos = ListarFiltrarArchivos.getPrestamos();
         for (Prestamo prestamo : prestamos) {
-            prestamo.actualizarPrestamo();
+            prestamo.aniadirLibroPrestamoAEstudiante();
              
         }
     }

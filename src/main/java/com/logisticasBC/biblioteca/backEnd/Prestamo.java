@@ -37,7 +37,7 @@ public class Prestamo extends Archivo {
         this.carnetEstudiante = carnetEstudiante;
         this.codigo = this.codigoLibro + "+" + this.carnetEstudiante + "+" + random();
         this.fechaPrestamo = fechaPrestamo;
-        actualizarPrestamo();
+        actualizarDatosEstudianteYLibro();
     }
 
     public int setAtributos(String[] textoLeido, int tipoArchivo){
@@ -134,7 +134,7 @@ public class Prestamo extends Archivo {
     }
 
     //Actualizar Datos del estudiante que realizo el prestamo
-    public void actualizarPrestamo () throws LibreriaException {
+    public void aniadirLibroPrestamoAEstudiante () throws LibreriaException {
         
         ArrayList<Estudiante> estudiantes = ListarFiltrarArchivos.getEstudiantes();
 
@@ -142,11 +142,21 @@ public class Prestamo extends Archivo {
             
             if (estudiante.getCarnet().equals(carnetEstudiante)) {
                 
-                estudiante.actualizarRegistroAlRealizarPrestamo(this);
+                estudiante.aniadirPrestamo(this);
             }
         }
     }
 
+    private void actualizarDatosEstudianteYLibro() throws LibreriaException{
+        
+        Estudiante estudiante = (Estudiante) ControladorAchivos.cargarArchivo( ControladorAchivos.PATH_DIRECTORIO_ESTUDIANTES + File.separatorChar + carnetEstudiante);
+        estudiante.aniadirPrestamo(this);
+        Libro libro = (Libro) ControladorAchivos.cargarArchivo( ControladorAchivos.PATH_DIRECTORIO_LIBROS + File.separatorChar + codigoLibro);
+        libro.prestarLibro();
+        
+        
+    }
+    
     private int random (){
         Random random = new Random();
         return random.nextInt(90000) + 10000;
@@ -280,7 +290,7 @@ public class Prestamo extends Archivo {
         return prestamos;
     }
 
-    public static ArrayList <Prestamo> prestamosHechosPorCarreraIntervalotTiempo (LocalDate fechaInferior, LocalDate fechaSuperior, int carrera){
+    public static ArrayList <Prestamo> prestamosHechosPorCarreraIntervalotTiempo (LocalDate fechaInferior, LocalDate fechaSuperior, int carrera) throws LibreriaException{
         
         ArrayList<Prestamo> prestamos = ListarFiltrarArchivos.getPrestamos();
         ArrayList<Prestamo> listaFiltrada = new ArrayList<>();
@@ -339,16 +349,23 @@ public class Prestamo extends Archivo {
     }
 
     //CARGAR UN PRESTAMO
-    public static Prestamo cargarPrestamo (String carnet, String codigoLibro) throws LibreriaException {
+    public static Prestamo cargarPrestamoActivo (String carnet, String codigoLibro) throws LibreriaException {
 
         ArrayList<Prestamo> prestamos = ListarFiltrarArchivos.getPrestamos();
         Prestamo prestamoBuscado = null;
 
         for (Prestamo prestamo : prestamos) {
             
-            if (prestamo.getCodigo().startsWith(codigoLibro + "+" + carnet) && prestamo.isPrestamoActivo()) {
-                prestamo = prestamoBuscado;
-            }
+            if ( prestamo.getCodigo().startsWith(codigoLibro + "+" + carnet) && prestamo.isPrestamoActivo() ) {
+                
+                System.out.println(prestamo.isPrestamoActivo());
+                prestamoBuscado = prestamo;
+                
+            } 
+        }
+
+        if(prestamoBuscado == null) {
+            throw new LibreriaException("No se ecuentran concidencias de prestamos activos con este numero de carnet y este codigo de libro.");
         }
 
         return prestamoBuscado;
